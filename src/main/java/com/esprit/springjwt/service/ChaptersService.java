@@ -19,17 +19,16 @@ public class ChaptersService {
     @Autowired
     private FormationRepository trainingRepository;
 
-public Chapters addChapters(Chapters chapters, Long id) {
-    Optional<Formation> optionalFormation = trainingRepository.findById(id);
-    if (optionalFormation.isPresent()) {
-        Formation formation = optionalFormation.get();
-        chapters.setFormation(formation);
-        return ChaptersRepository.save(chapters);
-    } else {
-
-        throw new NoSuchElementException("No Formation found with id: " + id);
+    public Chapters addChapters(Chapters chapters, Long id ) {
+        Optional<Formation> optionalFormation = trainingRepository.findById(id);
+        if (optionalFormation.isPresent()) {
+            Formation formation = optionalFormation.get();
+            chapters.setFormation(formation);
+            return ChaptersRepository.save(chapters);
+        } else {
+            throw new NoSuchElementException("No Formation found with id: " + chapters.getFormation().getId());
+        }
     }
-}
 
     public List<Chapters> getAllChapters() {
         return ChaptersRepository.findAll();

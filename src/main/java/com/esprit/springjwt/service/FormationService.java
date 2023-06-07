@@ -23,9 +23,15 @@ public class FormationService {
     private ChaptersRepository chaptersRepository;
 
     public Formation addFormation(Formation formation) {
+        Long categoryId = formation.getCategorie().getId();
+        // Make sure the categoryId is not null
+        if (categoryId == null) {
+            throw new IllegalArgumentException("Invalid Categorie ID: " + categoryId);
+        }
+
         // Retrieve the Categorie object by its ID
-        Categorie categorie = categorieRepository.findById(formation.getCategorie().getId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Categorie ID: " + formation.getCategorie().getId()));
+        Categorie categorie = categorieRepository.findById(categoryId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Categorie ID: " + categoryId));
 
         // Set the Categorie object in the Formation object
         formation.setCategorie(categorie);
@@ -34,14 +40,10 @@ public class FormationService {
         Formation savedFormation = formationRepository.save(formation);
 
         // Set the Formation object in each Chapters object
-        for (Chapters chapters : savedFormation.getChapters()) {
-            chapters.setFormation(savedFormation);
-            chaptersRepository.save(chapters);
-        }
+
 
         return savedFormation;
     }
-
 
     public List<Formation> getAllTypeForamtion() {
         return formationRepository.findAll();

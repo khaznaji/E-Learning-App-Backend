@@ -34,7 +34,7 @@ public class TrainingController {
     {
         return trainingServices.getTrainingById(id);
     }
-
+     /*
     @GetMapping("/getAllTraining")
     public List<Training> getAllTraining()
     {

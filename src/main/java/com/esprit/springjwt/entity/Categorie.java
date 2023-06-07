@@ -17,7 +17,7 @@ public class Categorie implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
-    @Size(max=15)
+    @Size(max=30)
     private String nomCate;
 
     @JsonIgnore

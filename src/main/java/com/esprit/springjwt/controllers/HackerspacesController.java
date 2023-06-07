@@ -6,11 +6,15 @@ import com.esprit.springjwt.entity.Projects;
 import com.esprit.springjwt.service.HackerspacesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.swing.plaf.synth.Region;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/Hackerspaces")
+@CrossOrigin(origins = "*")
 public class HackerspacesController {
     @Autowired
     HackerspacesService HackerspacesService;
@@ -21,8 +25,14 @@ public class HackerspacesController {
 
     }
     @PostMapping("/addHackerspaces")
-    public Hackerspaces addHackerspaces(@RequestBody Hackerspaces Hackerspaces){
-        return HackerspacesService.addHackerspaces(Hackerspaces);
+    public Hackerspaces addHackerspaces(@RequestParam("Region")String Region,
+                                        @RequestParam("Location") String Location,
+                                        @RequestParam("Phone")Integer Phone,
+                                        @RequestParam("Email")String Email,
+                                        @RequestParam("Description")String Description,
+                                        @RequestParam("Photo") MultipartFile Photo
+                                        ) throws IOException {
+        return HackerspacesService.addHackerspaces(Region,Location,Phone,Email,Description,Photo);
     }
     @PutMapping("/updateHackerspaces")
     public Hackerspaces updateHackerspaces(@RequestBody Hackerspaces Hackerspaces){
@@ -38,4 +48,9 @@ public class HackerspacesController {
         HackerspacesService.deleteHackerspaces(id);
     }
 
+    //get by region
+    @GetMapping("/getHackerspacesByRegion/{Region}")
+    public Hackerspaces getHackerspacesByRegion(@PathVariable("Region") String Region){
+        return HackerspacesService.getHackerspacesByRegion(Region);
+    }
 }
