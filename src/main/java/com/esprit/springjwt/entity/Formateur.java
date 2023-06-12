@@ -21,14 +21,10 @@ public class Formateur implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
-    @Size(max=50)
-    @NotBlank
-    @Size(max=50)
+
 
     private String Github;
-    @NotBlank
-    @Size(max=50)
+
 
     private String Linkedin;
     private String CV ;

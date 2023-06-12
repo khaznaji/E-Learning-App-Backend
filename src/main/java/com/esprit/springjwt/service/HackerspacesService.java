@@ -39,7 +39,7 @@ public class HackerspacesService {
         byte[] bytes1 = filesName.getBytes();
         Path path1 = Paths.get(UPLOAD_DOCUMENTS + filesName);
         Files.write(path1, bytes1);
-        String attributeName = Region.replaceAll("\\s+", "");;
+        String attributeName = Region .replaceAll("\\s+", "");;
 
         Hackerspaces hackerspaces = new Hackerspaces();
         hackerspaces.setRegion(attributeName);
