@@ -3,6 +3,7 @@ package com.esprit.springjwt.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -60,7 +61,9 @@ public  class User {
   @JsonIgnore
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
   private Formateur formateur;
-
+  @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
+  @JsonIgnore
+  public List<Projects> projets;
 
   public User() {
   }
