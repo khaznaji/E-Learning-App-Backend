@@ -1,6 +1,7 @@
 package com.esprit.springjwt.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+
 public class Projects implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +28,18 @@ public class Projects implements Serializable {
     private String size;
 
     private Date Date ;
-    @ManyToOne
-    @JsonIgnore
-    public User user;
+    @JsonIgnore // Ignorer la sérialisation JSON de cette propriété
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    private String nom ;
+    private String prenom ;
+    private String mail ;
+    private String typeF ;
+
+    private String image ;
+
     public String getSize() {
         return size;
     }
@@ -36,5 +47,15 @@ public class Projects implements Serializable {
     public void setSize(String size) {
         this.size = size;
     }
+    @Column(length = 1000)
+    private String remark = "No Remark";
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
 
 }
