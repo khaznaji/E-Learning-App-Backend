@@ -28,6 +28,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -106,9 +108,17 @@ public class ProjectsService {
                 // Créer un nouveau projet
                 Projects project = new Projects();
 
-                // Utiliser le nom du fichier comme nom de projet
+                // Utiliser le nom du fichier comme base pour le nom de projet
                 String fileName = file.getOriginalFilename();
-                project.setProjectname(fileName);
+
+                // Ajouter un timestamp au nom du fichier
+                LocalDateTime now = LocalDateTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                String timestamp = now.format(formatter);
+                String timestampedFileName = timestamp + "_" + fileName;
+
+                // Utiliser le nom de fichier avec timestamp comme nom de projet
+             //   project.setProjectname(timestampedFileName);
 
                 // Définir le type du projet en fonction de l'extension du fichier
                 String fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
@@ -120,8 +130,8 @@ public class ProjectsService {
                     project.setType("DOCX");
                 } else if (fileExtension.equals("jpg") || fileExtension.equals("jpeg") || fileExtension.equals("png")) {
                     project.setType("IMAGE");
-                } else if (fileExtension.equals("ppt")) {
-                    project.setType("PPT");
+                } else if (fileExtension.equals("xls")) {
+                    project.setType("XLS");
                 } else if (fileExtension.equals("pdf")) {
                     project.setType("PDF");
                 } else {
@@ -135,7 +145,7 @@ public class ProjectsService {
                 // Définir la taille du projet
                 long fileSize = file.getSize();
 
-                // Convertir la taille en un format lisible par l'homme
+                // Convertir la taille en un format lisible par l'humain
                 String size;
                 if (fileSize < 1024) {
                     size = fileSize + " B";
@@ -146,11 +156,33 @@ public class ProjectsService {
                 }
                 project.setSize(size);
 
-                // Définir le chemin du fichier
-                String filePath = "C:\\Users\\DELL\\Desktop\\9antraFormation-Front\\9antraFormationFront\\src\\assets\\projects\\" + fileName; // Remplacez par votre chemin de fichier souhaité
 
-                Path destinationPath = Paths.get(filePath);
+                // Obtenir l'ID de l'utilisateur
+                Long userId = user.getId();
+
+                // Créer le nom du dossier en utilisant le nom et l'ID de l'utilisateur
+                String userFolderName = user.getLastName() + "_" + userId;
+String userm = userFolderName +"/"+ timestampedFileName;
+                project.setProjectname(userm);
+                // Définir le chemin du dossier utilisateur
+                String userFolderPath = "C:\\Users\\DELL\\Desktop\\9antraFormation-Front\\9antraFormationFront\\src\\assets\\projects\\" + userFolderName;
+
+                // Créer le dossier utilisateur
+                File userFolder = new File(userFolderPath);
+                if (!userFolder.exists()) {
+                    boolean created = userFolder.mkdirs();
+                    if (!created) {
+                        throw new RuntimeException("Failed to create user folder");
+                    }
+                }
+
+                // Définir le chemin complet du fichier du projet dans le dossier utilisateur
+                String projectFilePath = userFolderPath + "\\" + timestampedFileName;
+                Path destinationPath = Paths.get(projectFilePath);
+
+                // Copier le fichier du projet dans le dossier utilisateur
                 Files.copy(file.getInputStream(), destinationPath, StandardCopyOption.REPLACE_EXISTING);
+
 
                 // Assigner l'utilisateur au projet
                 project.setUser(user);
@@ -159,7 +191,6 @@ public class ProjectsService {
                 project.setMail(user.getUsername());
                 project.setTypeF(user.getTypeFormation());
                 project.setImage(user.getImage());
-
 
 
                 // Enregistrer le projet
@@ -174,7 +205,9 @@ public class ProjectsService {
         } else {
             // Gérer les erreurs si le fichier n'est pas autorisé
             throw new IllegalArgumentException("Invalid file type");
-        }}
+        }
+    }
+
     public Projects updateProject(Long projectId, MultipartFile file) {
         // Vérifier si le projet existe
         Projects project = projectsRepository.findById(projectId)
@@ -196,9 +229,14 @@ public class ProjectsService {
                 // Récupérer le contenu du fichier
                 byte[] content = file.getBytes();
 
-                // Utiliser le nom du fichier comme nom de projet
+                // Utiliser le nom du fichier comme base pour le nom de projet
                 String fileName = file.getOriginalFilename();
-                project.setProjectname(fileName);
+
+                // Ajouter un timestamp au nom du fichier
+                LocalDateTime now = LocalDateTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                String timestamp = now.format(formatter);
+                String timestampedFileName = timestamp + "_" + fileName;
 
                 // Définir le type du projet en fonction de l'extension du fichier
                 String fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
@@ -236,11 +274,29 @@ public class ProjectsService {
                 }
                 project.setSize(size);
 
-                // Définir le chemin du fichier
-                String filePath = "C:\\Users\\DELL\\Desktop\\9antraFormation-Front\\9antraFormationFront\\src\\assets\\projects\\" + fileName; // Remplacez par votre chemin de fichier souhaité
+                // Obtenir l'ID de l'utilisateur
+                Long userId = project.getUser().getId();
 
-                Path destinationPath = Paths.get(filePath);
+                // Créer le nom du dossier en utilisant le nom et l'ID de l'utilisateur
+                String userFolderName = project.getUser().getLastName() + "_" + userId;
+
+                // Définir le chemin du dossier utilisateur
+                String userFolderPath = "C:\\Users\\DELL\\Desktop\\9antraFormation-Front\\9antraFormationFront\\src\\assets\\projects\\" + userFolderName;
+
+                // Définir le chemin complet du fichier du projet dans le dossier utilisateur
+                String projectFilePath = userFolderPath + "\\" + timestampedFileName;
+                Path destinationPath = Paths.get(projectFilePath);
+
+                // Supprimer l'ancien fichier du projet
+                String oldFilePath = userFolderPath + "\\" + project.getProjectname();
+                Path oldProjectPath = Paths.get(oldFilePath);
+                Files.deleteIfExists(oldProjectPath);
+
+                // Copier le nouveau fichier du projet dans le dossier utilisateur
                 Files.copy(file.getInputStream(), destinationPath, StandardCopyOption.REPLACE_EXISTING);
+
+                // Mettre à jour les informations du projet
+                project.setProjectname(timestampedFileName);
 
                 // Enregistrer les modifications du projet
                 Projects updatedProject = projectsRepository.save(project);
@@ -256,7 +312,6 @@ public class ProjectsService {
             throw new IllegalArgumentException("Invalid file type");
         }
     }
-
 
    /* public Projects addProjects(MultipartFile file) {
         // Vérifier si le fichier est de type ZIP, RAR, docx, jpg, jpeg, png, ppt ou pdf
@@ -419,8 +474,29 @@ public class ProjectsService {
     public Projects getProjectsById(Long id){return projectsRepository.findById(id).get();
     }
     public void deleteProjects(Long id) {
+        Projects project = projectsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Project not found"));
+
+        String fileName = project.getProjectname();
+
+        // Supprimer le fichier du dossier utilisateur
+        String userFolderName = project.getUser().getLastName() + "_" + project.getUser().getId();
+        String userFolderPath = "C:\\Users\\DELL\\Desktop\\9antraFormation-Front\\9antraFormationFront\\src\\assets\\projects\\" + userFolderName;
+        String filePath = userFolderPath + "\\" + fileName;
+        Path projectPath = Paths.get(filePath);
+
+        try {
+            Files.deleteIfExists(projectPath);
+        } catch (IOException e) {
+            // Gérer les erreurs lors de la suppression du fichier
+            e.printStackTrace();
+            throw new RuntimeException("Error deleting file");
+        }
+
+        // Supprimer l'entrée de la base de données
         projectsRepository.deleteById(id);
     }
+
 
 }
 

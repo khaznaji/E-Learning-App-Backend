@@ -4,15 +4,21 @@ package com.esprit.springjwt.controllers;
 import com.esprit.springjwt.entity.Projects;
 import com.esprit.springjwt.entity.User;
 import com.esprit.springjwt.repository.ProjectsRepository;
+import com.esprit.springjwt.repository.UserRepository;
+import com.esprit.springjwt.security.services.UserDetailsImpl;
 import com.esprit.springjwt.service.ProjectsService;
 import com.esprit.springjwt.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -27,6 +33,8 @@ public class ProjectsController {
     ProjectsRepository projectsRepository;
     @Autowired
     userService userDetailsService;
+    @Autowired
+    UserRepository userRepository;
     @GetMapping("/allProjects")
     public Set<User> getUsersWithProjects() {
         List<Projects> projects = ProjectsService.getAllProjects();
@@ -42,6 +50,12 @@ public class ProjectsController {
     public List<Projects> StudentProjects() {
         return ProjectsService.getAllProjectsStudent();
     }
+    @GetMapping("/countStudentProjects")
+    public int countStudentProjects() {
+        List<Projects> studentProjects = ProjectsService.getAllProjectsStudent();
+        return studentProjects.size();
+    }
+
     @GetMapping("/user/{userId}/projects")
     public List<Projects> getProjectsByUser(@PathVariable("userId") Long userId) {
         User user = userDetailsService.getUserById(userId); // Obtenez l'utilisateur à partir de votre service en utilisant l'ID
@@ -61,6 +75,42 @@ public class ProjectsController {
     @PutMapping("/{projectId}/update")
     public Projects updateProjectWithFile(@PathVariable("projectId") Long projectId, @RequestParam("file") MultipartFile file) {
         return ProjectsService.updateProject(projectId, file);
+    }
+    @GetMapping("/user/project-folder")
+    public ResponseEntity<String> getUserProjectFolder(HttpServletRequest request) {
+        // Récupérer l'utilisateur actuellement connecté
+        String username;
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.getPrincipal() instanceof UserDetailsImpl) {
+            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+            username = userDetails.getUsername();
+        } else {
+            // Utiliser une valeur par défaut ou une chaîne vide si le principal n'est pas disponible
+            username = "fddd";
+        }
+
+
+        // Récupérer l'utilisateur à partir du username (à adapter selon votre implémentation)
+            User user = userRepository.findByUsername(username);
+            if (user != null) {
+                // Créer le nom du dossier en utilisant le nom et l'ID de l'utilisateur
+                String userFolderName = user.getLastName() + "_" + user.getId();
+
+                // Construire le chemin du dossier utilisateur
+                String userFolderPath = "C:\\Users\\DELL\\Desktop\\9antraFormation-Front\\9antraFormationFront\\src\\assets\\projects\\" + userFolderName;
+
+                // Vérifier si le dossier utilisateur existe
+                File userFolder = new File(userFolderPath);
+                if (userFolder.exists() && userFolder.isDirectory()) {
+                    // Renvoyer le chemin du dossier utilisateur dans la réponse
+                    return ResponseEntity.ok(userFolderPath);
+                }
+            }
+
+
+        // Renvoyer une réponse d'erreur si le dossier utilisateur n'a pas été trouvé
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User project folder not found");
     }
 
 
@@ -93,6 +143,6 @@ public class ProjectsController {
             return ResponseEntity.ok(updatedProject);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }   
+        }
     }
 }
