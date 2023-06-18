@@ -6,6 +6,7 @@ import com.esprit.springjwt.entity.Formation;
 import com.esprit.springjwt.repository.ChaptersRepository;
 import com.esprit.springjwt.repository.FormationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,7 +53,14 @@ public class ChaptersService {
     public List<Formation> getAllTraining() {
         return trainingRepository.findAll();
     }
+    // get chapters by id formation
+    //public List<Chapters> getChaptersByFormationId(Long id) {
+       // return ChaptersRepository.findByFormationId(id);
+    //}
 }
+
+
+
 
 
 

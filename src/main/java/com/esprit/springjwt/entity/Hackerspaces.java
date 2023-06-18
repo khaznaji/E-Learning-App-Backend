@@ -13,7 +13,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Hackerspaces implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,4 +25,17 @@ public class Hackerspaces implements Serializable {
     private String Email;
     private String photo;
     private String Description;
+    private String Adresse;
+
+
+
+    public Hackerspaces(String region, String location, Integer phone, String email, String photo, String description, String adresse) {
+        Region = region;
+        Location = location;
+        Phone = phone;
+        Email = email;
+        this.photo = photo;
+        Description = description;
+        Adresse = adresse;
+    }
 }

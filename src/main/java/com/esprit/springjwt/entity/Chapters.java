@@ -25,7 +25,7 @@ public class Chapters implements Serializable {
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "idFormation")
-    private Formation Formation;
+    private Formation formation;
 
 }
 

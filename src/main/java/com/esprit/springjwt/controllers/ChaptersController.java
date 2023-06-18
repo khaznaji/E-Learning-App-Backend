@@ -2,6 +2,7 @@ package com.esprit.springjwt.controllers;
 
 
 import com.esprit.springjwt.entity.Chapters;
+import com.esprit.springjwt.entity.Formation;
 import com.esprit.springjwt.service.ChaptersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,5 +35,13 @@ public class ChaptersController {
 public Chapters updateChapters(@RequestBody Chapters Chapters){
         return ChaptersService.updateChapters(Chapters);
     }
+    //get chapters by  id formation
+    //@GetMapping("/getChaptersByFormationId/{id}")
+    //public List<Chapters> getChaptersByFormationId(@PathVariable("id") Long id)
+    //{
+      //  return ChaptersService.getChaptersByFormationId(id);
+   // }
+
+
 
 }

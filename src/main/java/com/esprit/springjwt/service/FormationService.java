@@ -7,6 +7,7 @@ import com.esprit.springjwt.repository.CategorieRepository;
 import com.esprit.springjwt.repository.ChaptersRepository;
 import com.esprit.springjwt.repository.FormationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -70,4 +71,8 @@ public class FormationService {
     public List<Formation> getFormationsByCategorieId(Long id) {
         return formationRepository.findByCategorieId(id);
     }
-}
+    public Formation getFormationByNomFormation(String nomFormation){
+        return formationRepository.findByNomFormation(nomFormation);
+    }
+    }
+

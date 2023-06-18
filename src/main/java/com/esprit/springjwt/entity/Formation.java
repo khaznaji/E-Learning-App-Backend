@@ -21,12 +21,13 @@ public class Formation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
+    @Column(unique = true)
     private String nomFormation;
 
     @ManyToOne
     @JoinColumn(name = "idCategorie")
     private Categorie categorie;
-    @OneToMany(mappedBy = "Formation")
+    @OneToMany(mappedBy = "formation")
     private List<Chapters> chapters;
     private int nbChapters;
     private int nbProjects;

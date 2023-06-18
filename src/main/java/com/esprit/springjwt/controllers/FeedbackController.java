@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/Feedback")
+@CrossOrigin(origins = "*")
 public class FeedbackController {
     @Autowired
     FeedbackService FeedbackService;
@@ -18,14 +19,20 @@ public class FeedbackController {
     @GetMapping("/allFeedback")
     public List<Feedback> getAllFeedback() {return FeedbackService.getAllFeedback();
     }
-    @PostMapping("/addFeedback/{idSession}")
-    public Feedback addFeedback(@RequestBody Feedback Feedback, @PathVariable("idSession") Long idSession){
-        return FeedbackService.addFeedback(Feedback, idSession);
+    @PostMapping("/addFeedback")
+    public Feedback addFeedback(@RequestBody Feedback Feedback){
+        return FeedbackService.addFeedback(Feedback);
     }
     @GetMapping("/getFeedbackById/{id}")
     public Feedback getFeedbackById(@PathVariable("id") Long id)
     {
         return FeedbackService.getFeedbackById(id);
+    }
+
+    @GetMapping("/getFeedbackByFormation/{formation}")
+    public List <Feedback> getFeedbackByFormation(@PathVariable("formation") String formation)
+    {
+        return FeedbackService.getFeedbackByFormation(formation);
     }
 
     @PutMapping("/updateFeedback/{idSession}")

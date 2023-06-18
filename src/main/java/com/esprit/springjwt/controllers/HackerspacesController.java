@@ -30,9 +30,11 @@ public class HackerspacesController {
                                         @RequestParam("Phone")Integer Phone,
                                         @RequestParam("Email")String Email,
                                         @RequestParam("Description")String Description,
-                                        @RequestParam("Photo") MultipartFile Photo
+                                        @RequestParam("Photo") MultipartFile Photo,
+                                        @RequestParam("adresse") String Adresse
+
                                         ) throws IOException {
-        return HackerspacesService.addHackerspaces(Region,Location,Phone,Email,Description,Photo);
+        return HackerspacesService.addHackerspaces(Region,Location,Phone,Email,Description,Adresse,Photo);
     }
     @PutMapping("/updateHackerspaces")
     public Hackerspaces updateHackerspaces(@RequestBody Hackerspaces Hackerspaces){

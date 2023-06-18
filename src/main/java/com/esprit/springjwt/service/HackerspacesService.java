@@ -31,6 +31,7 @@ public class HackerspacesService {
             Integer Phone,
             String Email,
             String Description,
+            String Adresse,
             MultipartFile photo
     ) throws IOException {
         String currentDate = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
@@ -46,6 +47,7 @@ public class HackerspacesService {
         hackerspaces.setLocation(Location);
         hackerspaces.setPhone(Phone);
         hackerspaces.setEmail(Email);
+        hackerspaces.setAdresse(Adresse);
         hackerspaces.setDescription(Description);
         hackerspaces.setPhoto(filesName);
         return hackerspacesRepository.save(hackerspaces);

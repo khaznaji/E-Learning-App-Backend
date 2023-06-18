@@ -39,6 +39,9 @@ public  class User {
 
   private  String numeroTel;
 
+  @JsonIgnore
+  @OneToMany
+  private Set<Feedback> feedbacks;
   @NotBlank
   @Size(max=50)
   private  String typeFormation;

@@ -15,9 +15,6 @@ public class Session implements Serializable {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
-    @JsonIgnore
-    @OneToMany(mappedBy = "Session")
-    private List<Feedback> Feedback;
 
     private String SessionName ;
     private String Description ;

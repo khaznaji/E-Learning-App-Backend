@@ -38,7 +38,13 @@ public class FormationController {
     {
         return formationService.getFormationById(id);
     }
-// add Formation by categroy id
+//get formation by nomformation
+    @GetMapping("/getFormationByNomFormation/{nomFormation}")
+    public Formation getFormationByNomFormation(@PathVariable("nomFormation") String nomFormation)
+    {
+        return formationService.getFormationByNomFormation(nomFormation);
+    }
+
 
 
 

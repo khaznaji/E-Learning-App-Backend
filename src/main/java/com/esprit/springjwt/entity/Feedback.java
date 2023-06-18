@@ -10,12 +10,24 @@ public class Feedback implements Serializable  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "idSession")
-    private Session Session;
+
+    private String formation ;
 
     private String Title ;
     private String Comment;
+
+    @ManyToOne
+    private User user;
+
+    public String getFormation() {
+        return formation;
+    }
+
+    public void setFormation(String formation) {
+        this.formation = formation;
+    }
+
+    @Temporal(TemporalType.DATE)
     private Date Date ;
 
     public Feedback() {
@@ -75,4 +87,13 @@ public class Feedback implements Serializable  {
     public void setSession(com.esprit.springjwt.entity.Session sessionById) {
 
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
+
