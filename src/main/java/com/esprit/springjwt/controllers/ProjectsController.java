@@ -87,7 +87,7 @@ public class ProjectsController {
             username = userDetails.getUsername();
         } else {
             // Utiliser une valeur par défaut ou une chaîne vide si le principal n'est pas disponible
-            username = "fddd";
+            username = "user1@gmail.com";
         }
 
 

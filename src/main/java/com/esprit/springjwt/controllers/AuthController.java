@@ -152,6 +152,7 @@ FormateurRepository formateurRepository;
 emailService.sendSimpleMail(username, subject, msj);
         return ResponseEntity.ok(new MessageResponse("Formateur registered successfully!"));
     }
+    private static final String DEFAULT_IMAGE_PATH = "C:\\Users\\DELL\\Desktop\\9antraFormation-Front\\9antraFormationFront\\src\\assets\\img\\profile-img.jpg";
 
 
 
@@ -177,6 +178,7 @@ emailService.sendSimpleMail(username, subject, msj);
         }
 
 
+        String imagePath = DEFAULT_IMAGE_PATH;
 
         // Create new user's account
 
@@ -190,7 +192,7 @@ emailService.sendSimpleMail(username, subject, msj);
 
 
         user.setCountry(country);
-            user.setImage("profile-img.jpg");
+        user.setImage("imagePath");
 
 
 

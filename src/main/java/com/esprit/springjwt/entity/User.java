@@ -65,6 +65,8 @@ public  class User {
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
   private Formateur formateur;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+  @JsonIgnore
+
   private List<Projects> projets;
 
   public List<Projects> getProjets() {

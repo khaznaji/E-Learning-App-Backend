@@ -1,12 +1,21 @@
 package com.esprit.springjwt.controllers;
 
+import com.esprit.springjwt.entity.Projects;
 import com.esprit.springjwt.entity.User;
+import com.esprit.springjwt.repository.UserRepository;
+import com.esprit.springjwt.security.services.UserDetailsImpl;
 import com.esprit.springjwt.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -17,7 +26,8 @@ public class UserController {
 
     @Autowired
     private userService userService;
-
+    @Autowired
+    private UserRepository userRepository;
     //get All Users
     @RequestMapping("/all")
     public List<User> getAllUsers() {
@@ -52,4 +62,42 @@ public class UserController {
     public User updateUserImageById(@RequestParam("image") MultipartFile image , @PathVariable Long id) throws IOException {
         return userService.updateUserImageById( image,id);
     }
+    @GetMapping("/me")
+    public ResponseEntity<User> getCurrentUserDetails() {
+        User currentUser;
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.getPrincipal() instanceof UserDetailsImpl) {
+            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+            currentUser = userDetails.getUser();
+        } else {
+            // Utiliser un utilisateur par défaut avec un nom d'utilisateur spécifique
+            currentUser = userRepository.findByUsername("user1@gmail.com"); // Remplacez "user1@gmail.com" par le nom d'utilisateur spécifique
+        }
+
+        return ResponseEntity.ok(currentUser);
+    }
+
+    @PostMapping("/addImage")
+    public ResponseEntity<User> addImage(@RequestParam("file") MultipartFile file) {
+        User currentUser;
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.getPrincipal() instanceof UserDetailsImpl) {
+            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+            currentUser = userDetails.getUser();
+            User updatedUser = userService.updateImage(currentUser, file);
+            return ResponseEntity.ok(updatedUser);
+        } else {
+            // Utiliser un utilisateur par défaut avec un nom d'utilisateur spécifique
+            User defaultUser = userRepository.findByUsername("user1@gmail.com");
+            if (defaultUser != null) {
+                User updatedUser = userService.updateImage(defaultUser, file);
+                return ResponseEntity.ok(updatedUser);
+            } else {
+                throw new IllegalArgumentException("Default user not found");
+            }
+        }
+    }
+
 }

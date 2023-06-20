@@ -58,7 +58,7 @@ public class ProjectsService {
             username = userDetails.getUsername();
         } else {
             // Utiliser une valeur par défaut si aucun utilisateur n'est passé
-            username = "fddd";
+            username = "user1@gmail.com";
         }
 
         // Récupérer l'utilisateur à partir du username (à adapter selon votre implémentation)
@@ -95,7 +95,7 @@ public class ProjectsService {
                     username = userDetails.getUsername();
                 } else {
                     // Utiliser une valeur par défaut ou une chaîne vide si le principal n'est pas disponible
-                    username = "fddd";
+                    username = "user1@gmail.com";
                 }
 
                 // Récupérer l'utilisateur à partir du username (à adapter selon votre implémentation)

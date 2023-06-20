@@ -48,7 +48,7 @@ public class Projects implements Serializable {
         this.size = size;
     }
     @Column(length = 1000)
-    private String remark = "No Remark";
+    private String remark ;
     public String getRemark() {
         return remark;
     }
