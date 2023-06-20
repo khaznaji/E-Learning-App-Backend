@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="9antraFormationBack" />
         <module name="spring-boot-security-jwt" />
         <module name="WaleBack" />
       </profile>
@@ -13,6 +14,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="9antraFormationBack" options="-parameters" />
       <module name="WaleBack" options="-parameters" />
       <module name="spring-boot-security-jwt" options="-parameters" />
     </option>

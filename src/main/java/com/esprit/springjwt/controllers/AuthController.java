@@ -93,7 +93,7 @@ FormateurRepository formateurRepository;
     }
 
 
-    public static String UPLOAD_DOCUMENTS = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Documents\\";
+    public static String UPLOAD_DOCUMENTS = "C:\\Users\\DELL\\Desktop\\9antraFormation-Front\\9antraFormationFront\\src\\assets\\Documents\\";
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUserCoach(@RequestParam("username") String username,
@@ -152,6 +152,7 @@ FormateurRepository formateurRepository;
 emailService.sendSimpleMail(username, subject, msj);
         return ResponseEntity.ok(new MessageResponse("Formateur registered successfully!"));
     }
+    private static final String DEFAULT_IMAGE_PATH = "C:\\Users\\DELL\\Desktop\\9antraFormation-Front\\9antraFormationFront\\src\\assets\\img\\profile-img.jpg";
 
 
 
@@ -163,7 +164,7 @@ emailService.sendSimpleMail(username, subject, msj);
                                                @RequestParam("numeroTel") String numeroTel,
                                                @RequestParam("typeFormation") String typeFormation,
                                                  @RequestParam("country") String country,
-                                                 @RequestParam("roles") Set<String> strRoles
+                                                     @RequestParam("roles") Set<String> strRoles
                                              ) throws IOException {
         String msj = "Bonjour " + firstName + " " + lastName + " votre compte a été crée avec succés";
         String subject = "Bienvenue sur 9antraTraining";
@@ -177,6 +178,7 @@ emailService.sendSimpleMail(username, subject, msj);
         }
 
 
+        String imagePath = DEFAULT_IMAGE_PATH;
 
         // Create new user's account
 
@@ -190,7 +192,7 @@ emailService.sendSimpleMail(username, subject, msj);
 
 
         user.setCountry(country);
-            user.setImage("profile-img.jpg");
+        user.setImage("imagePath");
 
 
 

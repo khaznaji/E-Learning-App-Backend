@@ -1,8 +1,10 @@
 package com.esprit.springjwt.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -12,6 +14,8 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
+
 public  class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,8 +67,18 @@ public  class User {
   @JsonIgnore
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
   private Formateur formateur;
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+  @JsonIgnore
 
+  private List<Projects> projets;
 
+  public List<Projects> getProjets() {
+    return projets;
+  }
+
+  public void setProjets(List<Projects> projets) {
+    this.projets = projets;
+  }
   public User() {
   }
 
