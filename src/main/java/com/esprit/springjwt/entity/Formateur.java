@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
@@ -33,6 +34,9 @@ public class Formateur implements Serializable {
     private User user;
 
     private String skills;
+    
+    @OneToMany(mappedBy = "formateur", cascade = CascadeType.ALL)
+    private List<Groups> groups;
 
     public Formateur() {
     }

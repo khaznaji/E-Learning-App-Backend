@@ -51,7 +51,6 @@ public class UserController {
         return userService.findByTypeFormationAndStatus(typeFormation, status);
     }
 
-    //getbyemail
     @GetMapping("/getbyemail/{email}")
     public User getUserByEmail(@PathVariable String email) {
         return userService.getUserByEmail(email);
