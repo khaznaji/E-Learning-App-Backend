@@ -93,7 +93,7 @@ public class userService {
             String userFolderName = currentUser.getLastName() + "_" + currentUser.getId();
 
             // Définir le chemin du dossier utilisateur
-            String userFolderPath = "C:\\Users\\DELL\\Desktop\\9antraFormation-Front\\9antraFormationFront\\src\\assets\\profile\\" + userFolderName;
+            String userFolderPath = "C:\\Users\\DELL\\Desktop\\The Bridge Front\\9antraFormationFrant\\src\\assets\\profile\\" + userFolderName;
 
             // Créer le dossier utilisateur
             File userFolder = new File(userFolderPath);

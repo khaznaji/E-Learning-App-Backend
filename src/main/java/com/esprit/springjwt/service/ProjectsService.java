@@ -165,7 +165,7 @@ public class ProjectsService {
 String userm = userFolderName +"/"+ timestampedFileName;
                 project.setProjectname(userm);
                 // Définir le chemin du dossier utilisateur
-                String userFolderPath = "C:\\Users\\DELL\\Desktop\\9antraFormation-Front\\9antraFormationFront\\src\\assets\\projects\\" + userFolderName;
+                String userFolderPath = "C:\\Users\\DELL\\Desktop\\The Bridge Front\\9antraFormationFrant\\src\\assets\\projects\\" + userFolderName;
 
                 // Créer le dossier utilisateur
                 File userFolder = new File(userFolderPath);
@@ -281,7 +281,7 @@ String userm = userFolderName +"/"+ timestampedFileName;
                 String userFolderName = project.getUser().getLastName() + "_" + userId;
 
                 // Définir le chemin du dossier utilisateur
-                String userFolderPath = "C:\\Users\\DELL\\Desktop\\9antraFormation-Front\\9antraFormationFront\\src\\assets\\projects\\" + userFolderName;
+                String userFolderPath = "C:\\Users\\DELL\\Desktop\\The Bridge Front\\9antraFormationFrant\\src\\assets\\projects\\" + userFolderName;
 
                 // Définir le chemin complet du fichier du projet dans le dossier utilisateur
                 String projectFilePath = userFolderPath + "\\" + timestampedFileName;
@@ -481,7 +481,7 @@ String userm = userFolderName +"/"+ timestampedFileName;
 
         // Supprimer le fichier du dossier utilisateur
         String userFolderName = project.getUser().getLastName() + "_" + project.getUser().getId();
-        String userFolderPath = "C:\\Users\\DELL\\Desktop\\9antraFormation-Front\\9antraFormationFront\\src\\assets\\projects\\" + userFolderName;
+        String userFolderPath = "C:\\Users\\DELL\\Desktop\\The Bridge Front\\9antraFormationFrant\\src\\assets\\projects\\" + userFolderName;
         String filePath = userFolderPath + "\\" + fileName;
         Path projectPath = Paths.get(filePath);
 
