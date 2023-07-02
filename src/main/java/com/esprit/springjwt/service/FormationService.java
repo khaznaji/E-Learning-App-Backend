@@ -29,20 +29,10 @@ public class FormationService {
         if (categoryId == null) {
             throw new IllegalArgumentException("Invalid Categorie ID: " + categoryId);
         }
-
-        // Retrieve the Categorie object by its ID
         Categorie categorie = categorieRepository.findById(categoryId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Categorie ID: " + categoryId));
-
-        // Set the Categorie object in the Formation object
-        formation.setCategorie(categorie);
-
-        // Save the Formation object
+        formation.setCategorie(categorie);    
         Formation savedFormation = formationRepository.save(formation);
-
-        // Set the Formation object in each Chapters object
-
-
         return savedFormation;
     }
 

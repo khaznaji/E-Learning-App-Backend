@@ -1,7 +1,16 @@
 package com.esprit.springjwt.repository;
 
-import com.esprit.springjwt.entity.Groups;
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
-public interface GroupsRepository extends JpaRepository<Groups,Long> {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.esprit.springjwt.entity.Groups;
+
+
+public interface GroupsRepository extends JpaRepository<Groups, Long> {
+    boolean existsByGroupNameIgnoreCase(String groupName);
+    @Query("SELECT g FROM Groups g WHERE g.formation.Id = :formationId")
+    List<Groups> findByFormationId(@Param("formationId") Long formationId);
 }
