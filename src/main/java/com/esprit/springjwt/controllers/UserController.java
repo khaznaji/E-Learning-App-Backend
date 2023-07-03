@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -61,7 +62,7 @@ public class UserController {
     public User updateUserImageById(@RequestParam("image") MultipartFile image , @PathVariable Long id) throws IOException {
         return userService.updateUserImageById( image,id);
     }
-    @GetMapping("/me")
+   @GetMapping("/me")
     public ResponseEntity<User> getCurrentUserDetails() {
         User currentUser;
 
@@ -76,6 +77,8 @@ public class UserController {
 
         return ResponseEntity.ok(currentUser);
     }
+
+
 
     @PostMapping("/addImage")
     public ResponseEntity<User> addImage(@RequestParam("file") MultipartFile file) {
