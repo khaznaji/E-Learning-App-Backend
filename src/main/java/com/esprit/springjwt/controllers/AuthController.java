@@ -93,7 +93,7 @@ FormateurRepository formateurRepository;
     }
 
 
-    public static String UPLOAD_DOCUMENTS = "C:\\Users\\DELL\\Desktop\\9antraFormation-Front\\9antraFormationFront\\src\\assets\\Documents\\";
+    public static String UPLOAD_DOCUMENTS = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Documents\\";
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUserCoach(@RequestParam("username") String username,
@@ -152,7 +152,7 @@ FormateurRepository formateurRepository;
 emailService.sendSimpleMail(username, subject, msj);
         return ResponseEntity.ok(new MessageResponse("Formateur registered successfully!"));
     }
-    private static final String DEFAULT_IMAGE_PATH = "C:\\Users\\DELL\\Desktop\\9antraFormation-Front\\9antraFormationFront\\src\\assets\\img\\profile-img.jpg";
+    private static final String DEFAULT_IMAGE_PATH = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Documents\\";
 
 
 

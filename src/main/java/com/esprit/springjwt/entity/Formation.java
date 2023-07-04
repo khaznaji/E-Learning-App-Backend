@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -28,7 +29,10 @@ public class Formation implements Serializable {
     @JoinColumn(name = "idCategorie")
     private Categorie categorie;
     @OneToMany(mappedBy = "formation")
+
     private List<Chapters> chapters;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
     private int nbChapters;
     private int nbProjects;
     private int nbExercices;

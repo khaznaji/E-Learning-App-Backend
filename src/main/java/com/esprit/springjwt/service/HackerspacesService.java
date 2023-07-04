@@ -40,7 +40,8 @@ public class HackerspacesService {
         byte[] bytes1 = filesName.getBytes();
         Path path1 = Paths.get(UPLOAD_DOCUMENTS + filesName);
         Files.write(path1, bytes1);
-        String attributeName = Region .replaceAll("\\s+", "");;
+        String attributeName = Region.replaceAll("\\s+", "");
+        ;
 
         Hackerspaces hackerspaces = new Hackerspaces();
         hackerspaces.setRegion(attributeName);
@@ -55,18 +56,24 @@ public class HackerspacesService {
     }
 
 
-    public List<Hackerspaces> getAllHackerspaces(){return hackerspacesRepository.findAll(); }
-    public Hackerspaces updateHackerspaces(Hackerspaces hackerspaces){
+    public List<Hackerspaces> getAllHackerspaces() {
+        return hackerspacesRepository.findAll();
+    }
+
+    public Hackerspaces updateHackerspaces(Hackerspaces hackerspaces) {
         return hackerspacesRepository.save(hackerspaces);
     }
-    public Hackerspaces getHackerspacesById(Long id){
+
+    public Hackerspaces getHackerspacesById(Long id) {
         return hackerspacesRepository.findById(id).get();
     }
-    public void deleteHackerspaces(Long id){
+
+    public void deleteHackerspaces(Long id) {
         hackerspacesRepository.deleteById(id);
     }
 
     public Hackerspaces getHackerspacesByRegion(String region) {
         return hackerspacesRepository.getHackerspacesByRegion(region);
     }
+
 }

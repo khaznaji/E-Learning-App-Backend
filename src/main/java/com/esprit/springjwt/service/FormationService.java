@@ -3,6 +3,7 @@ package com.esprit.springjwt.service;
 import com.esprit.springjwt.entity.Categorie;
 import com.esprit.springjwt.entity.Chapters;
 import com.esprit.springjwt.entity.Formation;
+import com.esprit.springjwt.entity.User;
 import com.esprit.springjwt.repository.CategorieRepository;
 import com.esprit.springjwt.repository.ChaptersRepository;
 import com.esprit.springjwt.repository.FormationRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -36,7 +38,8 @@ public class FormationService {
 
         // Set the Categorie object in the Formation object
         formation.setCategorie(categorie);
-
+        //display the date now
+        formation.setCreatedAt(LocalDateTime.now());
         // Save the Formation object
         Formation savedFormation = formationRepository.save(formation);
 
@@ -50,15 +53,11 @@ public class FormationService {
         return formationRepository.findAll();
     }
 
-    public void deleteFormationById(Long id) {
-        formationRepository.deleteById(id);
-    }
 
-    public Formation updateFormation(Formation formation) {
-        Categorie categorie = categorieRepository.findById(formation.getCategorie().getId()).get();
-        formation.setCategorie(categorie);
-        return formationRepository.save(formation);
-    }
+   //update Formation
+
+
+
 
     public Formation getFormationById(Long id) {
         return formationRepository.findById(id).get();
@@ -71,8 +70,21 @@ public class FormationService {
     public List<Formation> getFormationsByCategorieId(Long id) {
         return formationRepository.findByCategorieId(id);
     }
-    public Formation getFormationByNomFormation(String nomFormation){
+
+    public Formation getFormationByNomFormation(String nomFormation) {
         return formationRepository.findByNomFormation(nomFormation);
     }
+
+    //delete formation
+    public void deleteFormation(Long id) {
+        formationRepository.deleteById(id);
     }
+    //filtre formation by nomformation
+    public List<Formation> getFormationByNomFormationContains(String nomFormation) {
+        return formationRepository.findByNomFormationContains(nomFormation);
+    }
+
+
+}
+
 

@@ -1,6 +1,7 @@
 package com.esprit.springjwt.controllers;
 
 import com.esprit.springjwt.entity.Formation;
+import com.esprit.springjwt.entity.User;
 import com.esprit.springjwt.service.FormationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,12 @@ public class FormationController {
     @GetMapping("/all")
     public List<Formation> getAllformation(){
         return formationService.getAllTypeForamtion();
+    }
+    //delete formation
+    @DeleteMapping("/deleteFormation/{id}")
+    public void deleteFormation(@PathVariable("id") Long id)
+    {
+        formationService.deleteFormation(id);
     }
 
     @PostMapping("/addFormation")
@@ -44,6 +51,17 @@ public class FormationController {
     {
         return formationService.getFormationByNomFormation(nomFormation);
     }
+    //filtre formation by nomformation
+    @GetMapping("/search/{nomFormation}")
+    public List<Formation> getFormationsByNomFormationContains(@PathVariable String nomFormation) {
+        return formationService.getFormationByNomFormationContains(nomFormation);
+    }
+    //update formation
+
+
+
+
+
 
 
 

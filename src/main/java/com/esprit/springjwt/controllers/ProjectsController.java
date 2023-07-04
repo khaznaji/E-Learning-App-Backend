@@ -98,7 +98,7 @@ public class ProjectsController {
                 String userFolderName = user.getLastName() + "_" + user.getId();
 
                 // Construire le chemin du dossier utilisateur
-                String userFolderPath = "C:\\Users\\DELL\\Desktop\\9antraFormation-Front\\9antraFormationFront\\src\\assets\\projects\\" + userFolderName;
+                String userFolderPath = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Projects\\" + userFolderName;
 
                 // Vérifier si le dossier utilisateur existe
                 File userFolder = new File(userFolderPath);

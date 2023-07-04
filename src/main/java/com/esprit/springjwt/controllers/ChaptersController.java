@@ -42,6 +42,13 @@ public Chapters updateChapters(@RequestBody Chapters Chapters){
       //  return ChaptersService.getChaptersByFormationId(id);
    // }
 
+//get chapters by nomFormation
+    @GetMapping("/getChaptersByNomFormation/{nomFormation}")
+    public List<Chapters> getChaptersByNomFormation(@PathVariable("nomFormation") String nomFormation)
+    {
+        return ChaptersService.getChaptersByNomFormation(nomFormation);
+    }
+
 
 
 }

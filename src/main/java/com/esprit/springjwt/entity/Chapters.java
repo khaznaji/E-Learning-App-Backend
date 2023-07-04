@@ -20,6 +20,7 @@ public class Chapters implements Serializable {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     private String Title ;
+    @Column(columnDefinition = "LONGTEXT")
     private String Description ;
 
     @ManyToOne
