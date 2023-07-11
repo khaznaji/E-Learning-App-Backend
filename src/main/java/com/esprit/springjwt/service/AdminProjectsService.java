@@ -56,4 +56,5 @@ public class AdminProjectsService {
         // Supprimer l'entrée de la base de données
         adminProjectsRepository.deleteById(id);
     }
+
 }

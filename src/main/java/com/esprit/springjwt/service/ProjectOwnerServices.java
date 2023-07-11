@@ -1,5 +1,6 @@
 package com.esprit.springjwt.service;
 
+import com.esprit.springjwt.entity.ProjectClient;
 import com.esprit.springjwt.entity.ProjectOwner;
 import com.esprit.springjwt.entity.Projects;
 import com.esprit.springjwt.exception.ResourceNotFoundException;
@@ -28,13 +29,19 @@ public class ProjectOwnerServices {
     public List<ProjectOwner> getAllProjectOwners() {
         return projectOwnerRepository.findAll();
     }
+    public List<ProjectOwner> getClaimsByStatus(Boolean status) {
+        return projectOwnerRepository.findByStatus(status);
+    }
+    public List<ProjectOwner> getAllActiveProjectOwners() {
+        return projectOwnerRepository.findByStatus(true);
+    }
     public Optional<ProjectOwner> findById(Long id) {
         return projectOwnerRepository.findById(id);
     }
     public void deleteProjectOwner(Long id) {
         projectOwnerRepository.deleteById(id);
     }
-    public void deleteProjects(Long id) {
+    public void     deleteProjects(Long id) {
         ProjectOwner project = projectOwnerRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Project not found"));
 
@@ -56,5 +63,15 @@ public class ProjectOwnerServices {
         // Supprimer l'entrée de la base de données
         projectOwnerRepository.deleteById(id);
     }
+    public void updateStatus(Long id, boolean newValue) {
+        // Recherche de l'objet MyClass correspondant à l'identifiant "id"
+        ProjectOwner myObject = projectOwnerRepository.findById(id).orElse(null);
 
-}
+        // Vérification que l'objet a été trouvé
+        if (myObject != null) {
+            // Modification de la propriété "property2"
+            myObject.setStatus(newValue);
+            projectOwnerRepository.save(myObject);
+        }
+
+}}

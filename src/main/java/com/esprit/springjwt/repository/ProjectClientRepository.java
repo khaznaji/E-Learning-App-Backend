@@ -9,5 +9,10 @@ import java.util.List;
 @Repository
 public interface ProjectClientRepository extends JpaRepository<ProjectClient, Long> {
     List<ProjectClient> findByAdminProjectsId(Long adminProjectId);
+    List<ProjectClient> findByStatus(boolean status);
+    List<ProjectClient> findAllByOrderByDateAsc(); // for ascending order
+
+    List<ProjectClient> findAllByOrderByDateDesc(); // for descending order
+
 
 }

@@ -10,5 +10,7 @@ import java.util.List;
 public interface AdminProjectsRepository extends JpaRepository<AdminProjects,Long> {
     List<AdminProjects> findByProjectOwner(ProjectOwner projectOwner);
     AdminProjects findByTitre(String title);
+    AdminProjects findById(long id);
+
 
 }

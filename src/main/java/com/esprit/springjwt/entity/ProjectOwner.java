@@ -22,6 +22,13 @@ public class ProjectOwner implements Serializable {
     public String image ;
     private String email ;
     private int numtel ;
+    //optional
+    private boolean status ;
+    private String github ;
+    private String linkedin ;
+
+
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy="projectOwner")
     @JsonIgnore
     public List<AdminProjects> adminProjects;

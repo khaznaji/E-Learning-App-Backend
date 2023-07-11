@@ -36,4 +36,27 @@ public class ProjectClientService {
 
         return projectClientRepository.findByAdminProjectsId(adminProjectId);
     }
+
+    public void updateStatus(Long id, boolean newValue) {
+        // Recherche de l'objet MyClass correspondant à l'identifiant "id"
+        ProjectClient myObject = projectClientRepository.findById(id).orElse(null);
+        // Vérification que l'objet a été trouvé
+        if (myObject != null) {
+            // Modification de la propriété "property2"
+            myObject.setStatus(newValue);
+            projectClientRepository.save(myObject);
+        }
+
+
+    }
+    public List<ProjectClient> getClaimsByStatus(Boolean status) {
+        return projectClientRepository.findByStatus(status);
+    }
+    public List<ProjectClient> getAllClaimsSortedByDateAsc() {
+        return projectClientRepository.findAllByOrderByDateAsc();
+    }
+    public List<ProjectClient> getAllClaimsSortedByDateDesc() {
+        return projectClientRepository.findAllByOrderByDateDesc();
+    }
+
 }
