@@ -179,6 +179,5 @@ public class SpecificProjectController {
         SpecificProject employee = service.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + id));
         return ResponseEntity.ok().body(employee);
-
     }
 }
