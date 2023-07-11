@@ -1,16 +1,30 @@
 package com.esprit.springjwt.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -72,9 +86,29 @@ public  class User {
 
   private List<Projects> projets;
 
-  public List<Projects> getProjets() {
+  @ManyToMany(cascade = CascadeType.ALL)
+  @JoinTable(
+      name = "etudiant_groups",
+      joinColumns = @JoinColumn(name = "user_id"),
+      inverseJoinColumns = @JoinColumn(name = "groups_id")
+  )
+  @JsonIgnore
+  private List<Groups> groups = new ArrayList<>();
+  
+  public List<Groups> getGroups() {
+	return groups;
+}
+
+
+public void setGroups(List<Groups> groups) {
+	this.groups = groups;
+}
+
+
+public List<Projects> getProjets() {
     return projets;
   }
+  
 
   public void setProjets(List<Projects> projets) {
     this.projets = projets;

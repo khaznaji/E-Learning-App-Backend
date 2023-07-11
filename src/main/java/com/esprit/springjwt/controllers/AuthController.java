@@ -93,7 +93,9 @@ FormateurRepository formateurRepository;
     }
 
 
-    public static String UPLOAD_DOCUMENTS = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Documents\\";
+   // public static String UPLOAD_DOCUMENTS = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Documents\\";
+    public static String UPLOAD_DOCUMENTS = "C:\\Users\\zied1\\OneDrive\\Bureau\\L\\9antraFormationBack\\src\\main\\java\\com\\esprit\\springjwt\\files\\";
+    
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUserCoach(@RequestParam("username") String username,
