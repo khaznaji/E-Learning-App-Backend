@@ -78,26 +78,19 @@ public class UserController {
         return ResponseEntity.ok(currentUser);
     }
 
-    @PostMapping("/addImage")
-    public ResponseEntity<User> addImage(@RequestParam("file") MultipartFile file) {
-        User currentUser;
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication.getPrincipal() instanceof UserDetailsImpl) {
-            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-            currentUser = userDetails.getUser();
-            User updatedUser = userService.updateImage(currentUser, file);
-            return ResponseEntity.ok(updatedUser);
-        } else {
-            // Utiliser un utilisateur par défaut avec un nom d'utilisateur spécifique
-            User defaultUser = userRepository.findByUsername("user1@gmail.com");
-            if (defaultUser != null) {
-                User updatedUser = userService.updateImage(defaultUser, file);
-                return ResponseEntity.ok(updatedUser);
-            } else {
-                throw new IllegalArgumentException("Default user not found");
-            }
+    @PostMapping("/imagechange/{userId}")
+    public User updateImage(@PathVariable("userId") Long userId, @RequestParam("file") MultipartFile file) throws IOException {
+        User currentUser = userService.getUserById(userId);
+        if (currentUser == null) {
+            // Handle the case when the user doesn't exist
+            // For example, throw an exception or return an error response
         }
+
+        // Call the updateImage method from your service to update the user's image
+        currentUser = userService.updateUserImageById(file, userId);
+
+        return currentUser;
     }
+
 
 }

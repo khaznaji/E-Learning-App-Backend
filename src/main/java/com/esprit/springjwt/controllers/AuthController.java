@@ -166,7 +166,12 @@ emailService.sendSimpleMail(username, subject, msj);
                                                  @RequestParam("country") String country,
                                                      @RequestParam("roles") Set<String> strRoles
                                              ) throws IOException {
-        String msj = "Bonjour " + firstName + " " + lastName + " votre compte a été crée avec succés";
+        String msj = "Hi " + firstName + " " + lastName + " Welcome to The-Bridge " +
+                "Thank you for your request for information regarding "+ typeFormation + "Training" +
+                "Our team will contact you to finalize your registration to support you in your project, within 48 hours." +
+                "In the meantime, and for any additional information, do not hesitate to contact our team of educational advisers on 20 000 000."
+
+                ;
         String subject = "Bienvenue sur 9antraTraining";
 
 
