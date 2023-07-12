@@ -37,10 +37,19 @@ public class HackerspacesService {
         String currentDate = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
         String filesName = currentDate + photo.getOriginalFilename();
 
-        byte[] bytes1 = filesName.getBytes();
-        Path path1 = Paths.get(UPLOAD_DOCUMENTS + filesName);
-        Files.write(path1, bytes1);
-        String attributeName = Region .replaceAll("\\s+", "");;
+        // Generate a timestamp for the image filename
+        String timestamp = Long.toString(System.currentTimeMillis());
+
+        // Set the destination path to save the image
+        String destinationPath = "C:\\Users\\DELL\\Desktop\\1\\test1\\src\\assets\\img\\";
+
+        // Create a new filename using the timestamp and original filename
+        String newFilename = timestamp + "_" + photo.getOriginalFilename();
+
+        // Save the file to the disk
+        photo.transferTo(new File(UPLOAD_DOCUMENTS + newFilename));
+        String attributeName = Region.replaceAll("\\s+", "");
+        ;
 
         Hackerspaces hackerspaces = new Hackerspaces();
         hackerspaces.setRegion(attributeName);
@@ -49,24 +58,30 @@ public class HackerspacesService {
         hackerspaces.setEmail(Email);
         hackerspaces.setAdresse(Adresse);
         hackerspaces.setDescription(Description);
-        hackerspaces.setPhoto(filesName);
+        hackerspaces.setPhoto(newFilename);
         return hackerspacesRepository.save(hackerspaces);
 
     }
 
 
-    public List<Hackerspaces> getAllHackerspaces(){return hackerspacesRepository.findAll(); }
-    public Hackerspaces updateHackerspaces(Hackerspaces hackerspaces){
+    public List<Hackerspaces> getAllHackerspaces() {
+        return hackerspacesRepository.findAll();
+    }
+
+    public Hackerspaces updateHackerspaces(Hackerspaces hackerspaces) {
         return hackerspacesRepository.save(hackerspaces);
     }
-    public Hackerspaces getHackerspacesById(Long id){
+
+    public Hackerspaces getHackerspacesById(Long id) {
         return hackerspacesRepository.findById(id).get();
     }
-    public void deleteHackerspaces(Long id){
+
+    public void deleteHackerspaces(Long id) {
         hackerspacesRepository.deleteById(id);
     }
 
     public Hackerspaces getHackerspacesByRegion(String region) {
         return hackerspacesRepository.getHackerspacesByRegion(region);
     }
+
 }

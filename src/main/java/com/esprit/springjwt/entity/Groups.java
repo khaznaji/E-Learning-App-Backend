@@ -28,6 +28,7 @@ public class Groups implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+<<<<<<< HEAD
     private String groupName;
     private Date creationDate;
     @ManyToOne
@@ -74,5 +75,80 @@ public class Groups implements Serializable {
 	public void setSessions(List<Session> sessions) {
 		this.sessions = sessions;
 	}
+=======
+    
+    private String groupName;
+    private Date creationDate;
+
+    @ManyToOne
+    @JoinColumn(name = "formateur_id")
+    private User formateur;
+
+    @ManyToOne
+    @JoinColumn(name = "formation_id")
+    private Formation formation;
+
+    @ManyToMany(mappedBy = "groups")
+    private List<Session> sessions = new ArrayList<>();
+    
+    @ManyToMany(mappedBy = "groups")
+    private List<User> etudiants = new ArrayList<>();
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public User getFormateur() {
+		return formateur;
+	}
+
+	public void setFormateur(User formateur) {
+		this.formateur = formateur;
+	}
+
+	public Formation getFormation() {
+		return formation;
+	}
+
+	public void setFormation(Formation formation) {
+		this.formation = formation;
+	}
+
+	public List<Session> getSessions() {
+		return sessions;
+	}
+
+	public void setSessions(List<Session> sessions) {
+		this.sessions = sessions;
+	}
+
+	public List<User> getEtudiants() {
+		return etudiants;
+	}
+
+	public void setEtudiants(List<User> etudiants) {
+		this.etudiants = etudiants;
+	}
+>>>>>>> wale
     
 }

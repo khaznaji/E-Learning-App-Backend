@@ -1,6 +1,7 @@
 package com.esprit.springjwt.service;
 
 import com.esprit.springjwt.entity.Categorie;
+import com.esprit.springjwt.entity.Formation;
 import com.esprit.springjwt.repository.CategorieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,4 +33,9 @@ public class CategorieServices {
         categorieRepository.deleteById(id);
 
     }
+    public List<Categorie> getCategoriesByNomCateContains(String nomCate) {
+        return categorieRepository.findByNomCateContains(nomCate);
+    }
+
+
 }

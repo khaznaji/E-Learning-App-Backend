@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -19,7 +20,10 @@ public class Chapters implements Serializable {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
     private String Title ;
+    @Column(columnDefinition = "LONGTEXT")
     private String Description ;
 
     @ManyToOne

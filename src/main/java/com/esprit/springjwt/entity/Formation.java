@@ -1,16 +1,34 @@
 package com.esprit.springjwt.entity;
 
+<<<<<<< HEAD
+=======
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+>>>>>>> wale
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+<<<<<<< HEAD
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 
+=======
+>>>>>>> wale
 @Entity
 @Getter
 @Setter
@@ -29,12 +47,16 @@ public class Formation implements Serializable {
     @JoinColumn(name = "idCategorie")
     private Categorie categorie;
     @OneToMany(mappedBy = "formation")
+
     private List<Chapters> chapters;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
     private int nbChapters;
     private int nbProjects;
     private int nbExercices;
     private int nbMeetings;
     private String Description;
+<<<<<<< HEAD
 	public Long getId() {
 		return Id;
 	}
@@ -89,5 +111,8 @@ public class Formation implements Serializable {
 	public void setDescription(String description) {
 		Description = description;
 	}
+=======
+	
+>>>>>>> wale
     
 }

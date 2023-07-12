@@ -8,5 +8,5 @@ import java.util.List;
 public interface ChaptersRepository extends JpaRepository<Chapters, Long> {
 
 
-
+    List<Chapters> findByFormationNomFormation(String nomFormation);
 }

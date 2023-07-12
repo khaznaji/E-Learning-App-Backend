@@ -94,6 +94,12 @@ FormateurRepository formateurRepository;
 
     public static String UPLOAD_DOCUMENTS = "C:\\Users\\zied1\\OneDrive\\Bureau\\9antra\\9antraFormationBack\\src\\main\\java\\com\\esprit\\springjwt\\files\\documents\\";
 
+<<<<<<< HEAD
+=======
+   // public static String UPLOAD_DOCUMENTS = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Documents\\";
+    public static String UPLOAD_DOCUMENTS = "C:\\Users\\zied1\\OneDrive\\Bureau\\L\\9antraFormationBack\\src\\main\\java\\com\\esprit\\springjwt\\files\\";
+    
+>>>>>>> wale
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUserCoach(@RequestParam("username") String username,
@@ -152,7 +158,11 @@ FormateurRepository formateurRepository;
 emailService.sendSimpleMail(username, subject, msj);
         return ResponseEntity.ok(new MessageResponse("Formateur registered successfully!"));
     }
+<<<<<<< HEAD
     private static final String DEFAULT_IMAGE_PATH = "C:\\Users\\DELL\\Desktop\\The Bridge Front\\9antraFormationFrant\\src\\assets\\img\\profile-img.jpg";
+=======
+    private static final String DEFAULT_IMAGE_PATH = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Documents\\";
+>>>>>>> wale
 
 
 
@@ -164,7 +174,12 @@ emailService.sendSimpleMail(username, subject, msj);
                                                @RequestParam("numeroTel") String numeroTel,
                                                @RequestParam("typeFormation") String typeFormation, @RequestParam("country") String country, @RequestParam("roles") Set<String> strRoles
                                              ) throws IOException {
-        String msj = "Bonjour " + firstName + " " + lastName + " votre compte a été crée avec succés";
+        String msj = "Hi " + firstName + " " + lastName + " Welcome to The-Bridge " +
+                "Thank you for your request for information regarding "+ typeFormation + "Training" +
+                "Our team will contact you to finalize your registration to support you in your project, within 48 hours." +
+                "In the meantime, and for any additional information, do not hesitate to contact our team of educational advisers on 20 000 000."
+
+                ;
         String subject = "Bienvenue sur 9antraTraining";
 
 

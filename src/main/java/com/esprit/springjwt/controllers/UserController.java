@@ -78,6 +78,7 @@ public class UserController {
         return ResponseEntity.ok(currentUser);
     }
 
+<<<<<<< HEAD
 
 
     @PostMapping("/addImage")
@@ -99,7 +100,21 @@ public class UserController {
             } else {
                 throw new IllegalArgumentException("Default user not found");
             }
+=======
+    @PostMapping("/imagechange/{userId}")
+    public User updateImage(@PathVariable("userId") Long userId, @RequestParam("file") MultipartFile file) throws IOException {
+        User currentUser = userService.getUserById(userId);
+        if (currentUser == null) {
+            // Handle the case when the user doesn't exist
+            // For example, throw an exception or return an error response
+>>>>>>> wale
         }
+
+        // Call the updateImage method from your service to update the user's image
+        currentUser = userService.updateUserImageById(file, userId);
+
+        return currentUser;
     }
+
 
 }

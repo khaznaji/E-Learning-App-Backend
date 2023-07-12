@@ -17,9 +17,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.esprit.springjwt.entity.Groups;
+<<<<<<< HEAD
 import com.esprit.springjwt.repository.SessionRepository;
 import com.esprit.springjwt.service.FormationService;
 import com.esprit.springjwt.service.GroupsService;
+=======
+import com.esprit.springjwt.service.FormationService;
+import com.esprit.springjwt.service.GroupsService;
+import com.esprit.springjwt.service.SessionService;
+>>>>>>> wale
 
 @RestController
 @RequestMapping("/api/groups")
@@ -27,6 +33,11 @@ public class GroupsController {
     private final GroupsService groupsService;
     @Autowired
     private FormationService trainingService;
+<<<<<<< HEAD
+=======
+    @Autowired
+    private  SessionService sessionService;
+>>>>>>> wale
    
 
     @Autowired
@@ -49,12 +60,18 @@ public class GroupsController {
     }
     @PostMapping("/add")
     public ResponseEntity<?> addGroups(@Valid @RequestBody Groups groups) {
+<<<<<<< HEAD
         String groupName = groups.getGroupName();
         boolean groupNameExists = groupsService.checkIfGroupNameExists(groupName);
+=======
+        String GroupName = groups.getGroupName();
+        boolean groupNameExists = groupsService.checkIfGroupNameExists(GroupName);
+>>>>>>> wale
 
         // Check if the groupName already exists
         if (groupNameExists) {
             return ResponseEntity.badRequest().body("Group name already exists");
+<<<<<<< HEAD
         }
 
         Groups createdGroup = groupsService.addGroups(groups);
@@ -80,5 +97,46 @@ public class GroupsController {
     @DeleteMapping("/{id}")
     public void deleteGroups(@PathVariable("id") Long id) {
         groupsService.deleteGroups(id);
+=======
+        }
+
+        Groups createdGroup = groupsService.addGroups(groups);
+        return ResponseEntity.ok(createdGroup);
+    }
+
+    @GetMapping("/{id}")
+    public Groups getGroupsById(@PathVariable("id") Long id) {
+        return groupsService.getGroupsById(id);
+    }
+   
+    
+    @GetMapping("/by-formation/{id}")
+    public List<Groups> getGroupsByFormation(@PathVariable("id") Long Id) {
+        return groupsService.getGroupsByFormation(Id);
+    }
+    
+
+    @PutMapping("/update")
+    public Groups updateGroups(@Valid @RequestBody Groups groups) {
+        return groupsService.updateGroups(groups);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteGroups(@PathVariable("id") Long id) {
+        groupsService.deleteGroups(id);
+    }
+    @PostMapping("/{groupId}/etudiants/{etudiantId}")
+    public ResponseEntity<String> addEtudiantToGroup(@PathVariable Long groupId, @PathVariable Long etudiantId) {
+        try {
+            groupsService.addEtudiantToGroup(groupId, etudiantId);
+            return ResponseEntity.ok("Etudiant added to the group successfully");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    @DeleteMapping("/{groupId}/etudiants/{etudiantId}")
+    public void removeEtudiantFromGroup(@PathVariable Long groupId, @PathVariable Long etudiantId) {
+            groupsService.removeEtudiantFromGroup(groupId, etudiantId);           
+>>>>>>> wale
     }
 }

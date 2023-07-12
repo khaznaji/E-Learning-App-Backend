@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -25,6 +26,7 @@ public class ChaptersService {
         if (optionalFormation.isPresent()) {
             Formation formation = optionalFormation.get();
             chapters.setFormation(formation);
+            chapters.setCreatedAt(LocalDateTime.now());
             return ChaptersRepository.save(chapters);
         } else {
             throw new NoSuchElementException("No Formation found with id: " + chapters.getFormation().getId());
@@ -57,6 +59,14 @@ public class ChaptersService {
     //public List<Chapters> getChaptersByFormationId(Long id) {
        // return ChaptersRepository.findByFormationId(id);
     //}
+    //get chapters by nomformation
+    public List<Chapters> getChaptersByNomFormation(String nomFormation) {
+        return ChaptersRepository.findByFormationNomFormation(nomFormation);
+    }
+//delete chapters
+public void deleteChapters(Long id) {
+    ChaptersRepository.deleteById(id);
+}
 }
 
 
