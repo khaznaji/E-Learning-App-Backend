@@ -1,15 +1,14 @@
 package com.esprit.springjwt.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -32,5 +31,10 @@ public class company implements Serializable {
     private boolean status;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH-ss-mm")
     private LocalDateTime date = LocalDateTime.now();
+
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="company")
+    @JsonIgnore
+    public List<Offers> offers;
 
 }

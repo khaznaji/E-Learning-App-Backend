@@ -1,5 +1,6 @@
 package com.esprit.springjwt.service;
 
+import com.esprit.springjwt.entity.Candidacy;
 import com.esprit.springjwt.entity.ProjectOwner;
 import com.esprit.springjwt.entity.company;
 import com.esprit.springjwt.repository.CompanyRepository;
@@ -25,6 +26,12 @@ public class CompanyService {
     }
     public Optional<company > findById(Long id) {
         return companyRepository.findById(id);
+    }
+    public List<company> getAllClaimsSortedByDateAsc() {
+        return companyRepository.findAllByOrderByDateAsc();
+    }
+    public List<company> getAllClaimsSortedByDateDesc() {
+        return companyRepository.findAllByOrderByDateDesc();
     }
 
     public void     delete(Long id) {
@@ -63,5 +70,8 @@ public class CompanyService {
             companyRepository.save(myObject);
         }
 
+    }
+    public List<company> getAllActive() {
+        return companyRepository.findByStatus(true);
     }
 }

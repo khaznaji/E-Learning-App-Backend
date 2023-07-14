@@ -1,10 +1,13 @@
 package com.esprit.springjwt.entity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -14,29 +17,29 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Offers implements Serializable {
+public class Candidacy implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String poste ;
-    private String skills ;
-    private String description ;
+    private String nom ;
+    private String prenom ;
+    private int numtel ;
+    private String email ;
+    private String cv ;
+    private String lettreM ;
+    private String lettre ;
     private String experience ;
-    private String type ;
     private String education ;
-    @ManyToOne
-    @JsonIgnore
-    public company company;
+    private String type ;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH-ss-mm")
     private LocalDateTime date = LocalDateTime.now();
-    @Value("#{false}")
-    private boolean status;
-    private String image;
-    private  String nom ;
-    private  String description2 ;
-    private  String adresse ;
-    private  String email ;
-    private  int numtel ;
+
+
+
+
+
+
+
 
 
 }
