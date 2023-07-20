@@ -7,6 +7,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -38,5 +40,14 @@ public class Offers implements Serializable {
     private  String email ;
     private  int numtel ;
 
+    @ManyToMany(mappedBy = "offers")
+    @JsonIgnore
 
+    private List<OfferClient> offerClients;
+    public void addProjectClient(OfferClient projectClient) {
+        if (offerClients == null) {
+            offerClients = new ArrayList<>();
+        }
+        offerClients.add(projectClient);
+    }
 }
