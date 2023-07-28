@@ -8,4 +8,7 @@ public interface HackerspacesRepository extends JpaRepository<Hackerspaces,Long>
     //query select * from Hackerspaces where region = region
     @Query("select h from Hackerspaces h where h.Region = ?1")
     Hackerspaces getHackerspacesByRegion(String Region);
+
+
+
 }

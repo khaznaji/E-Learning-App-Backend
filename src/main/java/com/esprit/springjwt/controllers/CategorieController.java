@@ -1,6 +1,7 @@
 package com.esprit.springjwt.controllers;
 
 import com.esprit.springjwt.entity.Categorie;
+import com.esprit.springjwt.entity.Formation;
 import com.esprit.springjwt.service.CategorieServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +43,10 @@ public class CategorieController {
          categorieServices.deleteCategorie(id);
     }
 
+    @GetMapping("/categories/search/{nomCate}")
+    public List<Categorie> getCategoriesByNomCateContains(@PathVariable String nomCate) {
+        return categorieServices.getCategoriesByNomCateContains(nomCate);
+    }
 
 
 

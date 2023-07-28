@@ -56,6 +56,7 @@ public class ProjectsService {
         if (authentication.getPrincipal() instanceof UserDetailsImpl) {
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
             username = userDetails.getUsername();
+            System.out.println(username);
         } else {
             // Utiliser une valeur par défaut si aucun utilisateur n'est passé
             username = "user1@gmail.com";
@@ -166,6 +167,7 @@ String userm = userFolderName +"/"+ timestampedFileName;
                 project.setProjectname(userm);
                 // Définir le chemin du dossier utilisateur
                 String userFolderPath = "C:\\Users\\DELL\\Desktop\\The Bridge Front\\9antraFormationFrant\\src\\assets\\projects\\" + userFolderName;
+              //  String userFolderPath = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Projects\\" + userFolderName;
 
                 // Créer le dossier utilisateur
                 File userFolder = new File(userFolderPath);
@@ -282,6 +284,7 @@ String userm = userFolderName +"/"+ timestampedFileName;
 
                 // Définir le chemin du dossier utilisateur
                 String userFolderPath = "C:\\Users\\DELL\\Desktop\\The Bridge Front\\9antraFormationFrant\\src\\assets\\projects\\" + userFolderName;
+       //         String userFolderPath = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Projects\\" + userFolderName;
 
                 // Définir le chemin complet du fichier du projet dans le dossier utilisateur
                 String projectFilePath = userFolderPath + "\\" + timestampedFileName;
@@ -482,6 +485,7 @@ String userm = userFolderName +"/"+ timestampedFileName;
         // Supprimer le fichier du dossier utilisateur
         String userFolderName = project.getUser().getLastName() + "_" + project.getUser().getId();
         String userFolderPath = "C:\\Users\\DELL\\Desktop\\The Bridge Front\\9antraFormationFrant\\src\\assets\\projects\\" + userFolderName;
+       // String userFolderPath = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Projects\\" + userFolderName;
         String filePath = userFolderPath + "\\" + fileName;
         Path projectPath = Paths.get(filePath);
 

@@ -94,6 +94,9 @@ FormateurRepository formateurRepository;
 
 
     public static String UPLOAD_DOCUMENTS = "C:\\Users\\DELL\\Desktop\\The Bridge Front\\9antraFormationFrant\\src\\assets\\Documents\\";
+   // public static String UPLOAD_DOCUMENTS = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Documents\\";
+   // public static String UPLOAD_DOCUMENTS = "C:\\Users\\zied1\\OneDrive\\Bureau\\L\\9antraFormationBack\\src\\main\\java\\com\\esprit\\springjwt\\files\\";
+
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUserCoach(@RequestParam("username") String username,
@@ -153,6 +156,7 @@ emailService.sendSimpleMail(username, subject, msj);
         return ResponseEntity.ok(new MessageResponse("Formateur registered successfully!"));
     }
     private static final String DEFAULT_IMAGE_PATH = "C:\\Users\\DELL\\Desktop\\The Bridge Front\\9antraFormationFrant\\src\\assets\\img\\profile-img.jpg";
+   // private static final String DEFAULT_IMAGE_PATH = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Documents\\";
 
 
 

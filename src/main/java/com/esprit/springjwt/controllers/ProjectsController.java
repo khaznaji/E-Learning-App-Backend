@@ -97,6 +97,7 @@ public class ProjectsController {
 
                 // Construire le chemin du dossier utilisateur
                 String userFolderPath = "C:\\Users\\DELL\\Desktop\\The Bridge Front\\9antraFormationFrant\\src\\assets\\projects\\" + userFolderName;
+
                 // Vérifier si le dossier utilisateur existe
                 File userFolder = new File(userFolderPath);
                 if (userFolder.exists() && userFolder.isDirectory()) {

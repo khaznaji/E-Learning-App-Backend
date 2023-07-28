@@ -57,6 +57,11 @@ public class ChaptersService {
     //public List<Chapters> getChaptersByFormationId(Long id) {
        // return ChaptersRepository.findByFormationId(id);
     //}
+    //get chapters by nomformation
+    public List<Chapters> getChaptersByNomFormation(String nomFormation) {
+        return ChaptersRepository.findByFormationNomFormation(nomFormation);
+    }
+
 }
 
 

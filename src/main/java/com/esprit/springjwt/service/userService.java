@@ -94,6 +94,7 @@ public class userService {
 
             // Définir le chemin du dossier utilisateur
             String userFolderPath = "C:\\Users\\DELL\\Desktop\\The Bridge Front\\9antraFormationFrant\\src\\assets\\profile\\" + userFolderName;
+           // String userFolderPath = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\profile\\" + userFolderName;
 
             // Créer le dossier utilisateur
             File userFolder = new File(userFolderPath);
@@ -103,6 +104,8 @@ public class userService {
                     throw new RuntimeException("Failed to create user folder");
                 }
             }
+            //get user by id
+
 
             // Définir le chemin complet de la nouvelle image dans le dossier utilisateur
             String imagePath = userFolderPath + "\\" + timestampedFileName;

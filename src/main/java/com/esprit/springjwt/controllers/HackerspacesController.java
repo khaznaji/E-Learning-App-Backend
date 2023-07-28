@@ -45,7 +45,7 @@ public class HackerspacesController {
     {
         return HackerspacesService.getHackerspacesById(id);
     }
-    @GetMapping("/deleteHackerspaces/{id}")
+    @DeleteMapping("/deleteHackerspaces/{id}")
     public void deleteHackerspaces(@PathVariable("id") Long id){
         HackerspacesService.deleteHackerspaces(id);
     }
@@ -55,4 +55,5 @@ public class HackerspacesController {
     public Hackerspaces getHackerspacesByRegion(@PathVariable("Region") String Region){
         return HackerspacesService.getHackerspacesByRegion(Region);
     }
+
 }

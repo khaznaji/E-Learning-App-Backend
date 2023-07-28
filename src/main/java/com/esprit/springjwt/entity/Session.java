@@ -1,14 +1,14 @@
 package com.esprit.springjwt.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import java.io.Serializable;
+import java.util.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.sql.Time;
-import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Data;
 @Entity
 @Data
 public class Session implements Serializable {
@@ -18,10 +18,92 @@ public class Session implements Serializable {
 
     private String SessionName ;
     private String Description ;
-    private String Date ;
-private String StartTime;
-    private String EndTime;
+    private Date startDate;
+	
+    private Date finishDate;
     private String GroupSession;
+    
+    @ManyToMany
+    @JoinTable(
+        name = "session_group",
+        joinColumns = @JoinColumn(name = "session_id"),
+        inverseJoinColumns = @JoinColumn(name = "group_id")
+    )
+    @JsonIgnore
+    private List<Groups> groups = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "formation_id")
+    private Formation formation;
+
+	@ElementCollection
+	@CollectionTable(name = "user_presence_statuss", joinColumns = @JoinColumn(name = "group_id"))
+	@MapKeyColumn(name = "user_id")
+	@Column(name = "presence_status")
+	private Map<Long, Boolean> userPresence = new HashMap<>();
+	public List<Groups> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<Groups> groups) {
+        this.groups = groups;
+    }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getSessionName() {
+		return SessionName;
+	}
+
+	public void setSessionName(String sessionName) {
+		SessionName = sessionName;
+	}
+
+	public String getDescription() {
+		return Description;
+	}
+
+	public void setDescription(String description) {
+		Description = description;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getFinishDate() {
+		return finishDate;
+	}
+
+	public void setFinishDate(Date finishDate) {
+		this.finishDate = finishDate;
+	}
+
+	public Formation getFormation() {
+		return formation;
+	}
+
+	public void setFormation(Formation formation) {
+		this.formation = formation;
+	}
+
+	public String getGroupSession() {
+		return GroupSession;
+	}
+
+	public void setGroupSession(String groupSession) {
+		GroupSession = groupSession;
+	}
+
 
 
 

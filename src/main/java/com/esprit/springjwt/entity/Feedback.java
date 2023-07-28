@@ -12,7 +12,7 @@ public class Feedback implements Serializable  {
     private Long id;
 
     private String formation ;
-
+    @Column(columnDefinition = "LONGTEXT")
     private String Title ;
     private String Comment;
 
@@ -72,6 +72,7 @@ public class Feedback implements Serializable  {
 
     public Feedback(String title, String comment, java.util.Date date) {
         Title = title;
+
         Comment = comment;
         Date = date;
     }
@@ -79,6 +80,7 @@ public class Feedback implements Serializable  {
     public Feedback(Long id, String title, String comment, java.util.Date date) {
         this.id = id;
         Title = title;
+
         Comment = comment;
         Date = date;
 
