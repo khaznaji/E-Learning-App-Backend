@@ -18,7 +18,6 @@ import com.esprit.springjwt.repository.UserRepository;
 
 @Service
 public class GroupsService {
-    
     @Autowired
     private GroupsRepository groupsRepository;
     @Autowired
@@ -103,6 +102,9 @@ public class GroupsService {
 
         groupsRepository.save(group);
         userRepository.save(user);
+    }
+    public List<Groups> getGroupsByFormateurId(Long formateurId) {
+        return groupsRepository.findByFormateurId(formateurId);
     }
     
 

@@ -89,6 +89,8 @@ public class ProjectsController {
             // Utiliser une valeur par défaut ou une chaîne vide si le principal n'est pas disponible
             username = "user1@gmail.com";
         }
+
+
         // Récupérer l'utilisateur à partir du username (à adapter selon votre implémentation)
             User user = userRepository.findByUsername(username);
             if (user != null) {
@@ -96,12 +98,8 @@ public class ProjectsController {
                 String userFolderName = user.getLastName() + "_" + user.getId();
 
                 // Construire le chemin du dossier utilisateur
-<<<<<<< HEAD
-                String userFolderPath = "C:\\Users\\DELL\\Desktop\\The Bridge Front\\9antraFormationFrant\\src\\assets\\projects\\" + userFolderName;
-=======
                 String userFolderPath = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Projects\\" + userFolderName;
 
->>>>>>> wale
                 // Vérifier si le dossier utilisateur existe
                 File userFolder = new File(userFolderPath);
                 if (userFolder.exists() && userFolder.isDirectory()) {

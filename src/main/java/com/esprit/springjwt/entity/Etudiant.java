@@ -1,5 +1,9 @@
 package com.esprit.springjwt.entity;
 
+public class Etudiant {
+}
+package com.esprit.springjwt.entity;
+
 import java.io.Serializable;
 import java.util.Date;
 

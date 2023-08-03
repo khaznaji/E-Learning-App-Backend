@@ -60,7 +60,7 @@ public  class User {
   @JsonIgnore
   @OneToMany
   private Set<Feedback> feedbacks;
-  //@NotBlank
+  @NotBlank
   @Size(max=50)
   private  String typeFormation;
 
@@ -68,7 +68,7 @@ public  class User {
   @NotBlank
   private  String image;
 
-  //@NotBlank
+  @NotBlank
   private String country;
 
   private Boolean enabled=false;
@@ -81,9 +81,6 @@ public  class User {
   @JsonIgnore
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
   private Formateur formateur;
-  @JsonIgnore
-  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-  private Etudiant etudiant;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
   @JsonIgnore
 
@@ -124,21 +121,7 @@ public List<Projects> getProjets() {
         this.password = password;
     }
 
-  public User(String username, String password, String firstName, String lastName, String numeroTel , String image, String country, Boolean enabled, Set<Role> roles, Formateur formateur,Etudiant etudiant) {
-    this.username = username;
-    this.password = password;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.numeroTel = numeroTel;
-    this.image = image;
-    this.country = country;
-    this.enabled = enabled;
-    this.roles = roles;
-    this.formateur = formateur;
-    this.etudiant = etudiant;
-  }
-
-  public User(String username, String password, String firstName, String lastName, String numeroTel, String typeFormation,String image, String country, Boolean enabled, Set<Role> roles, Formateur formateur,Etudiant etudiant) {
+  public User(String username, String password, String firstName, String lastName, String numeroTel, String typeFormation, String image, String country, Boolean enabled, Set<Role> roles, Formateur formateur) {
     this.username = username;
     this.password = password;
     this.firstName = firstName;
@@ -149,18 +132,23 @@ public List<Projects> getProjets() {
     this.country = country;
     this.enabled = enabled;
     this.roles = roles;
-    this.etudiant = etudiant;
+    this.formateur = formateur;
   }
 
-  public Etudiant getEtudiant() {
-	return etudiant;
-}
+  public User(String username, String password, String firstName, String lastName, String numeroTel, String image, String country, Boolean enabled, Set<Role> roles, Formateur formateur) {
+    this.username = username;
+    this.password = password;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.numeroTel = numeroTel;
+    this.image = image;
+    this.country = country;
+    this.enabled = enabled;
+    this.roles = roles;
+    this.formateur = formateur;
+  }
 
-public void setEtudiant(Etudiant etudiant) {
-	this.etudiant = etudiant;
-}
-
-public Boolean getEnabled() {
+  public Boolean getEnabled() {
     return enabled;
   }
 

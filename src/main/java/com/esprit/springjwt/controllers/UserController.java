@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -52,6 +51,7 @@ public class UserController {
         return userService.findByTypeFormationAndStatus(typeFormation, status);
     }
 
+    //getbyemail
     @GetMapping("/getbyemail/{email}")
     public User getUserByEmail(@PathVariable String email) {
         return userService.getUserByEmail(email);
@@ -62,7 +62,7 @@ public class UserController {
     public User updateUserImageById(@RequestParam("image") MultipartFile image , @PathVariable Long id) throws IOException {
         return userService.updateUserImageById( image,id);
     }
-   @GetMapping("/me")
+    @GetMapping("/me")
     public ResponseEntity<User> getCurrentUserDetails() {
         User currentUser;
 
@@ -78,36 +78,12 @@ public class UserController {
         return ResponseEntity.ok(currentUser);
     }
 
-<<<<<<< HEAD
-
-
-    @PostMapping("/addImage")
-    public ResponseEntity<User> addImage(@RequestParam("file") MultipartFile file) {
-        User currentUser;
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication.getPrincipal() instanceof UserDetailsImpl) {
-            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-            currentUser = userDetails.getUser();
-            User updatedUser = userService.updateImage(currentUser, file);
-            return ResponseEntity.ok(updatedUser);
-        } else {
-            // Utiliser un utilisateur par défaut avec un nom d'utilisateur spécifique
-            User defaultUser = userRepository.findByUsername("user1@gmail.com");
-            if (defaultUser != null) {
-                User updatedUser = userService.updateImage(defaultUser, file);
-                return ResponseEntity.ok(updatedUser);
-            } else {
-                throw new IllegalArgumentException("Default user not found");
-            }
-=======
     @PostMapping("/imagechange/{userId}")
     public User updateImage(@PathVariable("userId") Long userId, @RequestParam("file") MultipartFile file) throws IOException {
         User currentUser = userService.getUserById(userId);
         if (currentUser == null) {
             // Handle the case when the user doesn't exist
             // For example, throw an exception or return an error response
->>>>>>> wale
         }
 
         // Call the updateImage method from your service to update the user's image

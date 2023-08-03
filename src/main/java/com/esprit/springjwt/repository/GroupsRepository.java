@@ -15,7 +15,7 @@ public interface GroupsRepository extends JpaRepository<Groups,Long> {
     @Query("SELECT g FROM Groups g WHERE g.formation.Id = :formationId")
     List<Groups> findByFormationId(@Param("formationId") Long formationId);
     List<Groups> findByFormateur(User formateur);
-   
+    List<Groups> findByFormateurId(Long formateurId);
 
     
 }

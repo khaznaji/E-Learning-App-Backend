@@ -18,10 +18,6 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
-<<<<<<< HEAD
-
-=======
->>>>>>> wale
 @Entity
 @Data
 public class Session implements Serializable {
@@ -110,10 +106,6 @@ public class Session implements Serializable {
 	public void setGroupSession(String groupSession) {
 		GroupSession = groupSession;
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> wale
 
 
 

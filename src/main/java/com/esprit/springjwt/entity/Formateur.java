@@ -17,15 +17,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-<<<<<<< HEAD
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import java.io.Serializable;
-import java.util.List;
-
-=======
->>>>>>> wale
 @Getter
 @Setter
 @AllArgsConstructor

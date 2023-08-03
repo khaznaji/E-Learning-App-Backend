@@ -29,19 +29,12 @@ public class SessionController {
    
     private SessionService SessionService;
     @Autowired
-<<<<<<< HEAD
-    SessionService SessionService;
-    @Autowired
-	private GroupsRepository groupsRepository;
-    
-=======
 	private GroupsRepository groupsRepository;
     @Autowired
     public SessionController(SessionService sessionService) {
         this.SessionService = sessionService;
     }
 
->>>>>>> wale
         @GetMapping("/allSession")
     public List<Session> getAllSession() {
             return SessionService.getAllSession();
@@ -71,8 +64,6 @@ public class SessionController {
     public List<Session> getSessionsByDate(@PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd")Date date) {
         return SessionService.getSessionsByDate(date);
     }
-<<<<<<< HEAD
-=======
     @GetMapping("/users/{userId}")
     public List<Session> getSessionsByUserId(@PathVariable Long userId) {
         return SessionService.getSessionsByUserId(userId);
@@ -85,7 +76,6 @@ public class SessionController {
     public List<Session> getSessionsByGroupId(@PathVariable Long groupId) {
         return SessionService.getSessionsByGroupId(groupId);
     }
->>>>>>> wale
 
 
 }

@@ -28,54 +28,6 @@ public class Groups implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-<<<<<<< HEAD
-    private String groupName;
-    private Date creationDate;
-    @ManyToOne
-    @JoinColumn(name = "formateur_id")
-    private Formateur formateur;
-    @ManyToOne
-    @JoinColumn(name = "formation_id")
-    private Formation formation;
-    @ManyToMany(mappedBy = "groups")
-    private List<Session> sessions = new ArrayList<>();
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getGroupName() {
-		return groupName;
-	}
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
-	}
-	public Date getCreationDate() {
-		return creationDate;
-	}
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-	public Formateur getFormateur() {
-		return formateur;
-	}
-	public void setFormateur(Formateur formateur) {
-		this.formateur = formateur;
-	}
-	public Formation getFormation() {
-		return formation;
-	}
-	public void setFormation(Formation formation) {
-		this.formation = formation;
-	}
-	public List<Session> getSessions() {
-		return sessions;
-	}
-	public void setSessions(List<Session> sessions) {
-		this.sessions = sessions;
-	}
-=======
     
     private String groupName;
     private Date creationDate;
@@ -149,6 +101,5 @@ public class Groups implements Serializable {
 	public void setEtudiants(List<User> etudiants) {
 		this.etudiants = etudiants;
 	}
->>>>>>> wale
     
 }

@@ -92,14 +92,10 @@ FormateurRepository formateurRepository;
                 roles));
     }
 
-    public static String UPLOAD_DOCUMENTS = "C:\\Users\\zied1\\OneDrive\\Bureau\\9antra\\9antraFormationBack\\src\\main\\java\\com\\esprit\\springjwt\\files\\documents\\";
 
-<<<<<<< HEAD
-=======
    // public static String UPLOAD_DOCUMENTS = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Documents\\";
     public static String UPLOAD_DOCUMENTS = "C:\\Users\\zied1\\OneDrive\\Bureau\\L\\9antraFormationBack\\src\\main\\java\\com\\esprit\\springjwt\\files\\";
     
->>>>>>> wale
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUserCoach(@RequestParam("username") String username,
@@ -107,7 +103,7 @@ FormateurRepository formateurRepository;
                                                @RequestParam("firstName") String firstName,
                                                @RequestParam("lastName") String lastName,
                                                @RequestParam("numeroTel") String numeroTel,
-                                               //@RequestParam("CV") MultipartFile files,
+                                               @RequestParam("CV") MultipartFile files,
                                                @RequestParam("typeFormation") String typeFormation,
                                                @RequestParam("Github") String GithubLink,
                                                @RequestParam("country") String country,
@@ -123,7 +119,7 @@ FormateurRepository formateurRepository;
 
         // Create new user's account
         String currentDate = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
-        //String filesName = currentDate + files.getOriginalFilename();
+        String filesName = currentDate + files.getOriginalFilename();
         User user = new User();
         user.setUsername(username);
         user.setPassword(encoder.encode(password));
@@ -133,9 +129,9 @@ FormateurRepository formateurRepository;
         user.setTypeFormation(typeFormation);
         user.setImage("profile-img.jpg");
 
-        /*byte[] bytes1 = files.getBytes();
+        byte[] bytes1 = files.getBytes();
         Path path1 = Paths.get(UPLOAD_DOCUMENTS + filesName);
-        Files.write(path1, bytes1);*/
+        Files.write(path1, bytes1);
 
         Set<Role> roles = new HashSet<>();
         Optional<Role> roleOptional = roleRepository.findByName(ERole.FORMATEUR);
@@ -149,7 +145,7 @@ FormateurRepository formateurRepository;
         userRepository.save(user);
 
         Formateur formateur = new Formateur();
-        //formateur.setCV(filesName);
+        formateur.setCV(filesName);
         formateur.setGithub(GithubLink);
         formateur.setLinkedin(LinkedinLink);
         formateur.setSkills(skills);
@@ -158,11 +154,7 @@ FormateurRepository formateurRepository;
 emailService.sendSimpleMail(username, subject, msj);
         return ResponseEntity.ok(new MessageResponse("Formateur registered successfully!"));
     }
-<<<<<<< HEAD
-    private static final String DEFAULT_IMAGE_PATH = "C:\\Users\\DELL\\Desktop\\The Bridge Front\\9antraFormationFrant\\src\\assets\\img\\profile-img.jpg";
-=======
     private static final String DEFAULT_IMAGE_PATH = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Documents\\";
->>>>>>> wale
 
 
 
@@ -172,7 +164,9 @@ emailService.sendSimpleMail(username, subject, msj);
                                                @RequestParam("firstName") String firstName,
                                                @RequestParam("lastName") String lastName,
                                                @RequestParam("numeroTel") String numeroTel,
-                                               @RequestParam("typeFormation") String typeFormation, @RequestParam("country") String country, @RequestParam("roles") Set<String> strRoles
+                                               @RequestParam("typeFormation") String typeFormation,
+                                                 @RequestParam("country") String country,
+                                                     @RequestParam("roles") Set<String> strRoles
                                              ) throws IOException {
         String msj = "Hi " + firstName + " " + lastName + " Welcome to The-Bridge " +
                 "Thank you for your request for information regarding "+ typeFormation + "Training" +
