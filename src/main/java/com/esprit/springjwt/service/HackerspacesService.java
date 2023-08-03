@@ -1,0 +1,87 @@
+package com.esprit.springjwt.service;
+
+
+import com.esprit.springjwt.entity.Hackerspaces;
+import com.esprit.springjwt.entity.Progress;
+import com.esprit.springjwt.repository.HackerspacesRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+@Service
+public class HackerspacesService {
+    @Autowired
+    private HackerspacesRepository hackerspacesRepository;
+
+    //add hackerspace with upload it photo
+    public static String UPLOAD_DOCUMENTS = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Documents\\";
+
+    public Hackerspaces addHackerspaces(
+            String Region,
+            String Location,
+            Integer Phone,
+            String Email,
+            String Description,
+            String Adresse,
+            MultipartFile photo
+    ) throws IOException {
+        String currentDate = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
+        String filesName = currentDate + photo.getOriginalFilename();
+
+        // Generate a timestamp for the image filename
+        String timestamp = Long.toString(System.currentTimeMillis());
+
+        // Set the destination path to save the image
+        String destinationPath = "C:\\Users\\DELL\\Desktop\\1\\test1\\src\\assets\\img\\";
+
+        // Create a new filename using the timestamp and original filename
+        String newFilename = timestamp + "_" + photo.getOriginalFilename();
+
+        // Save the file to the disk
+        photo.transferTo(new File(UPLOAD_DOCUMENTS + newFilename));
+        String attributeName = Region.replaceAll("\\s+", "");
+        ;
+
+        Hackerspaces hackerspaces = new Hackerspaces();
+        hackerspaces.setRegion(attributeName);
+        hackerspaces.setLocation(Location);
+        hackerspaces.setPhone(Phone);
+        hackerspaces.setEmail(Email);
+        hackerspaces.setAdresse(Adresse);
+        hackerspaces.setDescription(Description);
+        hackerspaces.setPhoto(newFilename);
+        return hackerspacesRepository.save(hackerspaces);
+
+    }
+
+
+    public List<Hackerspaces> getAllHackerspaces() {
+        return hackerspacesRepository.findAll();
+    }
+
+    public Hackerspaces updateHackerspaces(Hackerspaces hackerspaces) {
+        return hackerspacesRepository.save(hackerspaces);
+    }
+
+    public Hackerspaces getHackerspacesById(Long id) {
+        return hackerspacesRepository.findById(id).get();
+    }
+
+    public void deleteHackerspaces(Long id) {
+        hackerspacesRepository.deleteById(id);
+    }
+
+    public Hackerspaces getHackerspacesByRegion(String region) {
+        return hackerspacesRepository.getHackerspacesByRegion(region);
+    }
+
+}
