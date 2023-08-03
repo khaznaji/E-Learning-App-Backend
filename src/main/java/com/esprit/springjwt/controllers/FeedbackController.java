@@ -43,4 +43,18 @@ public class FeedbackController {
     public void deleteFeedback(@PathVariable("id") Long id){
         FeedbackService.deleteFeedback(id);
     }
+
+
+    // get feedback by posted true
+    @GetMapping("/getFeedbackByPosted")
+    public List<Feedback> getFeedbackByPosted(){
+        return FeedbackService.getFeedbackPosted();
+    }
+
+    // update feedback by posted
+    @PatchMapping("/updateFeedbackPosted/{id}")
+    public Feedback updateFeedbackPosted(@PathVariable("id") Long id){
+        return FeedbackService.updateFeedbackPosted(id);
+    }
+
 }

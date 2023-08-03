@@ -41,12 +41,7 @@ public class ChaptersService {
         ChaptersRepository.deleteById(id);
     }
 
-//updqte chapters with checking if the training exist
-    public Chapters updateChapters(Chapters Chapters) {
-        Formation formation = trainingRepository.findById(Chapters.getFormation().getId()).get();
-        Chapters.setFormation(formation);
-        return ChaptersRepository.save(Chapters);
-    }
+
 
     public Chapters getChaptersById(Long id) {
         return ChaptersRepository.findById(id).get();
@@ -67,8 +62,21 @@ public class ChaptersService {
 public void deleteChapters(Long id) {
     ChaptersRepository.deleteById(id);
 }
-}
 
+    public Chapters updateChapters(Long id, Chapters updatedChapter) {
+        Optional<Chapters> optionalChapter = ChaptersRepository.findById(id);
+        if (optionalChapter.isPresent()) {
+            Chapters existingChapter = optionalChapter.get();
+            existingChapter.setTitle(updatedChapter.getTitle());
+            existingChapter.setDescription(updatedChapter.getDescription());
+            // You can update other properties as needed
+
+            return ChaptersRepository.save(existingChapter);
+        } else {
+            throw new NoSuchElementException("No Chapter found with id: " + id);
+        }
+    }
+}
 
 
 

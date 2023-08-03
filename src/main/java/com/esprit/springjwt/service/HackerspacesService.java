@@ -23,7 +23,7 @@ public class HackerspacesService {
     private HackerspacesRepository hackerspacesRepository;
 
     //add hackerspace with upload it photo
-    public static String UPLOAD_DOCUMENTS = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Documents\\";
+    public static String UPLOAD_DOCUMENTS = "C:\\Users\\Wale\\Desktop\\zied\\9antraFormationFrant-wale\\src\\assets\\Documents\\";
 
     public Hackerspaces addHackerspaces(
             String Region,
@@ -41,7 +41,7 @@ public class HackerspacesService {
         String timestamp = Long.toString(System.currentTimeMillis());
 
         // Set the destination path to save the image
-        String destinationPath = "C:\\Users\\DELL\\Desktop\\1\\test1\\src\\assets\\img\\";
+        String destinationPath = "C:\\Users\\Wale\\Desktop\\zied\\9antraFormationFrant-wale\\src\\assets\\Documents\\";
 
         // Create a new filename using the timestamp and original filename
         String newFilename = timestamp + "_" + photo.getOriginalFilename();

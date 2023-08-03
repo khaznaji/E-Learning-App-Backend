@@ -1,5 +1,6 @@
 package com.esprit.springjwt.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -35,43 +36,51 @@ public  class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotBlank
   @Size(max = 80)
   @Column(unique = true)
   private String username;
 
 
-  @NotBlank
+
   @Size(max = 120)
   private String password;
 
-  @NotBlank
   @Size(max=50)
   private  String firstName;
-  @NotBlank
   @Size(max=50)
   private  String lastName;
+  @Size(min = 8, max = 40,message="Please enter a valid number")
 
-  @NotBlank
-  @Digits(integer=8, fraction=0, message="Please enter a valid number")
 
   private  String numeroTel;
 
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  @Column(name = "created_at")
+  private LocalDateTime createdAt;
+  private String about;
   @JsonIgnore
   @OneToMany
   private Set<Feedback> feedbacks;
-  @NotBlank
   @Size(max=50)
   private  String typeFormation;
 
 
-  @NotBlank
+
   private  String image;
 
-  @NotBlank
+
   private String country;
 
-  private Boolean enabled=false;
+
+
+  private int enabled=0;
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(  name = "user_roles",
         joinColumns = @JoinColumn(name = "user_id"),
@@ -121,7 +130,7 @@ public List<Projects> getProjets() {
         this.password = password;
     }
 
-  public User(String username, String password, String firstName, String lastName, String numeroTel, String typeFormation, String image, String country, Boolean enabled, Set<Role> roles, Formateur formateur) {
+  public User(String username, String password, String firstName, String lastName, String numeroTel, String typeFormation, String image, String country, int enabled, Set<Role> roles, Formateur formateur,String about) {
     this.username = username;
     this.password = password;
     this.firstName = firstName;
@@ -133,9 +142,10 @@ public List<Projects> getProjets() {
     this.enabled = enabled;
     this.roles = roles;
     this.formateur = formateur;
+    this.about=about;
   }
 
-  public User(String username, String password, String firstName, String lastName, String numeroTel, String image, String country, Boolean enabled, Set<Role> roles, Formateur formateur) {
+  public User(String username, String password, String firstName, String lastName, String numeroTel, String image, String country, int enabled, Set<Role> roles, Formateur formateur) {
     this.username = username;
     this.password = password;
     this.firstName = firstName;
@@ -148,11 +158,11 @@ public List<Projects> getProjets() {
     this.formateur = formateur;
   }
 
-  public Boolean getEnabled() {
+  public int getEnabled() {
     return enabled;
   }
 
-  public void setEnabled(Boolean enabled) {
+  public void setEnabled(int enabled) {
     this.enabled = enabled;
   }
 
@@ -245,4 +255,12 @@ public List<Projects> getProjets() {
   public void setFormateur(Formateur formateur) {
     this.formateur = formateur;
   }
+
+    public String getAbout() {
+    return about;
+    }
+
+    public void setAbout(String about) {
+    this.about = about;
+    }
 }

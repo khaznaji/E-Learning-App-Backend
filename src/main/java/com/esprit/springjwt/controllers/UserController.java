@@ -2,12 +2,14 @@ package com.esprit.springjwt.controllers;
 
 import com.esprit.springjwt.entity.Projects;
 import com.esprit.springjwt.entity.User;
+import com.esprit.springjwt.repository.FormateurRepository;
 import com.esprit.springjwt.repository.UserRepository;
 import com.esprit.springjwt.security.services.UserDetailsImpl;
 import com.esprit.springjwt.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,6 +30,8 @@ public class UserController {
     private userService userService;
     @Autowired
     private UserRepository userRepository;
+
+
     //get All Users
     @RequestMapping("/all")
     public List<User> getAllUsers() {
@@ -92,5 +96,15 @@ public class UserController {
         return currentUser;
     }
 
+    @PutMapping("/updateEnableDisable/{enabled}/{id}")
+    public Integer updateEnableDisable(@PathVariable Long enabled, @PathVariable Long id) {
+        System.err.println("Tbadaaaalt ");
+        return userService.updateEnabled(enabled, id);
+    }
+
+    @PutMapping("/updateUser")
+    public User updateUser(@RequestBody User user) {
+        return userService.updateUser(user);
+    }
 
 }

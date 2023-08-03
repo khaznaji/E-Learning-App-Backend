@@ -36,10 +36,7 @@ public class ChaptersController {
     {
         ChaptersService.deleteChapters(id);
     }
-    @PutMapping("/updateChapters")
-public Chapters updateChapters(@RequestBody Chapters Chapters){
-        return ChaptersService.updateChapters(Chapters);
-    }
+
     //get chapters by  id formation
     //@GetMapping("/getChaptersByFormationId/{id}")
     //public List<Chapters> getChaptersByFormationId(@PathVariable("id") Long id)
@@ -52,6 +49,11 @@ public Chapters updateChapters(@RequestBody Chapters Chapters){
     public List<Chapters> getChaptersByNomFormation(@PathVariable("nomFormation") String nomFormation)
     {
         return ChaptersService.getChaptersByNomFormation(nomFormation);
+    }
+    // Update chapters by ID
+    @PutMapping("/updateChapters/{id}")
+    public Chapters updateChapters(@PathVariable("id") Long id, @RequestBody Chapters updatedChapters) {
+        return ChaptersService.updateChapters(id, updatedChapters);
     }
 
 

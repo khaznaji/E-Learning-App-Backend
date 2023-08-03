@@ -1,11 +1,13 @@
 package com.esprit.springjwt.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.esprit.springjwt.entity.User;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -35,4 +37,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "SELECT * FROM user WHERE email = ?1", nativeQuery = true)
     User findByEmail(String email);
 
+    //query update enabled
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE user SET enabled = ?1 WHERE id = ?2", nativeQuery = true)
+    Integer updateEnabled(Long enabled, Long id);
 }

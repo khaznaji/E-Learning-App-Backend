@@ -29,10 +29,10 @@ public class FormateurController {
 
 
     @GetMapping("/all")
-    public List<Formateur> getAll()
-    {
+    public List<Formateur> getAll() {
         return formateurService.getAllFormateurs();
     }
+
     @GetMapping("/me")
     public ResponseEntity<User> getCurrentUserDetails() {
         User currentUser;
@@ -49,7 +49,11 @@ public class FormateurController {
         return ResponseEntity.ok(currentUser);
     }
 
-        }
+    @PutMapping("/updateFormateurByIdUser")
+    public Formateur updateFormateurByIdUser(@RequestBody Formateur formateur) {
+        return formateurService.updateFormateurByIdUser(formateur);
+    }
+}
 
 
 

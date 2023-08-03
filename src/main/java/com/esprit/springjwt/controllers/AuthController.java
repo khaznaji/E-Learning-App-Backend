@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -94,7 +95,7 @@ FormateurRepository formateurRepository;
 
 
    // public static String UPLOAD_DOCUMENTS = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Documents\\";
-    public static String UPLOAD_DOCUMENTS = "C:\\Users\\zied1\\OneDrive\\Bureau\\L\\9antraFormationBack\\src\\main\\java\\com\\esprit\\springjwt\\files\\";
+    public static String UPLOAD_DOCUMENTS = "C:\\Users\\Wale\\Desktop\\zied\\9antraFormationFrant-wale\\src\\assets\\Documents\\";
     
 
     @PostMapping("/signup")
@@ -108,7 +109,9 @@ FormateurRepository formateurRepository;
                                                @RequestParam("Github") String GithubLink,
                                                @RequestParam("country") String country,
                                                   @RequestParam("skills") String skills,
-                                               @RequestParam("Linkedin") String LinkedinLink) throws IOException {
+                                               @RequestParam("Linkedin") String LinkedinLink,
+                                               @RequestParam("about") String about
+                                               ) throws IOException {
 
         String msj = "Bonjour " + firstName + " " + lastName + " votre compte a été crée avec succés";
         String subject = "Bienvenue sur 9antraTraining";
@@ -127,7 +130,8 @@ FormateurRepository formateurRepository;
         user.setLastName(lastName);
         user.setNumeroTel(numeroTel);
         user.setTypeFormation(typeFormation);
-        user.setImage("profile-img.jpg");
+        user.setAbout(about);
+        user.setImage("avatarCoach.png");
 
         byte[] bytes1 = files.getBytes();
         Path path1 = Paths.get(UPLOAD_DOCUMENTS + filesName);
@@ -142,6 +146,8 @@ FormateurRepository formateurRepository;
         }
         user.setRoles(roles);
         user.setCountry(country);
+        user.setCreatedAt(LocalDateTime.now());
+
         userRepository.save(user);
 
         Formateur formateur = new Formateur();
@@ -154,7 +160,7 @@ FormateurRepository formateurRepository;
 emailService.sendSimpleMail(username, subject, msj);
         return ResponseEntity.ok(new MessageResponse("Formateur registered successfully!"));
     }
-    private static final String DEFAULT_IMAGE_PATH = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Documents\\";
+    private static final String DEFAULT_IMAGE_PATH = "C:\\Users\\Wale\\Desktop\\zied\\9antraFormationFrant-wale\\src\\assets\\Documents\\";
 
 
 
@@ -166,7 +172,8 @@ emailService.sendSimpleMail(username, subject, msj);
                                                @RequestParam("numeroTel") String numeroTel,
                                                @RequestParam("typeFormation") String typeFormation,
                                                  @RequestParam("country") String country,
-                                                     @RequestParam("roles") Set<String> strRoles
+                                                     @RequestParam("roles") Set<String> strRoles,
+                                                 @RequestParam("about") String about
                                              ) throws IOException {
         String msj = "Hi " + firstName + " " + lastName + " Welcome to The-Bridge " +
                 "Thank you for your request for information regarding "+ typeFormation + "Training" +
@@ -196,10 +203,9 @@ emailService.sendSimpleMail(username, subject, msj);
         user.setLastName(lastName);
         user.setNumeroTel(numeroTel);
         user.setTypeFormation(typeFormation);
-
-
+        user.setAbout(about);
         user.setCountry(country);
-        user.setImage("imagePath");
+        user.setImage("avatarStudent.png");
 
 
 
@@ -232,7 +238,7 @@ emailService.sendSimpleMail(username, subject, msj);
 
 
         user.setRoles(roles);
-
+        user.setCreatedAt(LocalDateTime.now());
 
         userRepository.save(user);
 
