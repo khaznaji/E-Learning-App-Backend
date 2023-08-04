@@ -38,7 +38,7 @@ public class userService {
     @Autowired
     private FormateurRepository formateurRepository;
 
-    public static String UPLOAD_DOCUMENTS = "C:\\Users\\Wale\\Desktop\\zied\\9antraFormationFrant-wale\\src\\assets\\Documents\\";
+    public static String UPLOAD_DOCUMENTS = "C:\\Users\\zied1\\OneDrive\\Bureau\\9antra alternative\\Master\\src\\assets\\Documents\\";
 
 
     //get All Users
