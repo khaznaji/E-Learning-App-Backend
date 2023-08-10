@@ -44,9 +44,20 @@ public class GroupsService {
         Optional<Groups> optionalGroups = groupsRepository.findById(id);
         return optionalGroups.orElse(null);
     }
+    public void deleteGroups(Long groupId) {
+        Groups group = groupsRepository.findById(groupId)
+                .orElseThrow(() -> new RuntimeException("Group not found"));
 
-    public void deleteGroups(Long id) {
-        groupsRepository.deleteById(id);
+        // Remove the relationship between the group and students
+        group.getEtudiants().forEach(etudiant -> etudiant.getGroups().remove(group));
+        group.getEtudiants().clear();
+
+        // Delete the sessions associated with the group
+        group.getSessions().forEach(session -> session.getGroups().remove(group));
+        group.getSessions().clear();
+
+        // Delete the group
+        groupsRepository.delete(group);
     }
     public boolean checkIfGroupNameExists(String groupName) {
         return groupsRepository.existsByGroupNameIgnoreCase(groupName);

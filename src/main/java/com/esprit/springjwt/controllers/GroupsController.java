@@ -71,6 +71,7 @@ public class GroupsController {
     public Groups getGroupsById(@PathVariable("id") Long id) {
         return groupsService.getGroupsById(id);
     }
+    
    
     
     @GetMapping("/by-formation/{id}")
@@ -88,6 +89,7 @@ public class GroupsController {
     public void deleteGroups(@PathVariable("id") Long id) {
         groupsService.deleteGroups(id);
     }
+    
     @PostMapping("/{groupId}/etudiants/{etudiantId}")
     public ResponseEntity<String> addEtudiantToGroup(@PathVariable Long groupId, @PathVariable Long etudiantId) {
         try {
