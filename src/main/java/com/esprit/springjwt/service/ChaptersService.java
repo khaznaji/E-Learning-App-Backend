@@ -63,19 +63,8 @@ public void deleteChapters(Long id) {
     ChaptersRepository.deleteById(id);
 }
 
-    public Chapters updateChapters(Long id, Chapters updatedChapter) {
-        Optional<Chapters> optionalChapter = ChaptersRepository.findById(id);
-        if (optionalChapter.isPresent()) {
-            Chapters existingChapter = optionalChapter.get();
-            existingChapter.setTitle(updatedChapter.getTitle());
-            existingChapter.setDescription(updatedChapter.getDescription());
-            // You can update other properties as needed
 
-            return ChaptersRepository.save(existingChapter);
-        } else {
-            throw new NoSuchElementException("No Chapter found with id: " + id);
-        }
-    }
+
 }
 
 

@@ -57,6 +57,9 @@ public class userService {
             }
             return userRepository.save(user);
     }
+    // add note to user
+
+
 
 
     public User getUserById(Long id){

@@ -5,6 +5,7 @@ import com.esprit.springjwt.entity.Chapters;
 import com.esprit.springjwt.entity.Formation;
 import com.esprit.springjwt.service.ChaptersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,10 +52,7 @@ public class ChaptersController {
         return ChaptersService.getChaptersByNomFormation(nomFormation);
     }
     // Update chapters by ID
-    @PutMapping("/updateChapters/{id}")
-    public Chapters updateChapters(@PathVariable("id") Long id, @RequestBody Chapters updatedChapters) {
-        return ChaptersService.updateChapters(id, updatedChapters);
-    }
+
 
 
 

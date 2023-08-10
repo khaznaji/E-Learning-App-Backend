@@ -1,10 +1,12 @@
 package com.esprit.springjwt.controllers;
 
+import com.esprit.springjwt.entity.Note;
 import com.esprit.springjwt.entity.Projects;
 import com.esprit.springjwt.entity.User;
 import com.esprit.springjwt.repository.FormateurRepository;
 import com.esprit.springjwt.repository.UserRepository;
 import com.esprit.springjwt.security.services.UserDetailsImpl;
+import com.esprit.springjwt.service.NoteService;
 import com.esprit.springjwt.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +32,9 @@ public class UserController {
     private userService userService;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private NoteService noteService;
+
 
 
     //get All Users
@@ -107,4 +112,16 @@ public class UserController {
         return userService.updateUser(user);
     }
 
+
+    @PostMapping("/{userId}/notes")
+    public ResponseEntity<Note> addNoteToUser(@PathVariable Long userId, @RequestBody String content) {
+        Note note = noteService.addNoteToUser(userId, content);
+        return ResponseEntity.ok(note);
+    }
+
+    @GetMapping("/{userId}/notes")
+    public ResponseEntity<List<Note>> getAllNotesForUser(@PathVariable Long userId) {
+        List<Note> notes = noteService.getAllNotesForUser(userId);
+        return ResponseEntity.ok(notes);
+    }
 }

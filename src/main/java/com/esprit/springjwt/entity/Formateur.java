@@ -91,7 +91,7 @@ public class Formateur implements Serializable {
     public void setSkills(String skills) {
         this.skills = skills;
     }
-  
+
 
 }
 
