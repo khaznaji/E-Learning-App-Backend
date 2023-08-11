@@ -4,6 +4,7 @@ import com.esprit.springjwt.entity.Categorie;
 import com.esprit.springjwt.entity.Formation;
 import com.esprit.springjwt.service.CategorieServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,10 +34,10 @@ public class CategorieController {
         return categorieServices.getCategorieById(id);
     }
 
-    @PutMapping("/updateCategories")
+    /*@PutMapping("/updateCategories")
     public Categorie updateCategories(@RequestBody Categorie categorie){
         return categorieServices.updateCategorie(categorie);
-    }
+    }*/
 
     @DeleteMapping("/deleteCategories/{id}")
     public void deleteCategories(@PathVariable("id") Long id){
@@ -49,6 +50,14 @@ public class CategorieController {
     }
 
 
-
-
+    @PutMapping("/updateCategories/{id}")
+    public ResponseEntity<Categorie> updateCategories(@PathVariable("id") Long id, @RequestBody Categorie updatedCategorie) {
+        Categorie updatedCategory = categorieServices.updateCategorie(id, updatedCategorie);
+        if (updatedCategory != null) {
+            return ResponseEntity.ok(updatedCategory);
+        } else {
+            // Category with the given ID not found
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

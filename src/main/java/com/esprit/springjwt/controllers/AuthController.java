@@ -111,6 +111,7 @@ FormateurRepository formateurRepository;
                                                   @RequestParam("skills") String skills,
                                                @RequestParam("Linkedin") String LinkedinLink,
                                                @RequestParam("about") String about
+
                                                ) throws IOException {
 
         String msj = "Bonjour " + firstName + " " + lastName + " votre compte a été crée avec succés";
@@ -131,6 +132,7 @@ FormateurRepository formateurRepository;
         user.setNumeroTel(numeroTel);
         user.setTypeFormation(typeFormation);
         user.setAbout(about);
+
         user.setImage("avatarCoach.png");
 
         byte[] bytes1 = files.getBytes();
@@ -174,6 +176,7 @@ emailService.sendSimpleMail(username, subject, msj);
                                                  @RequestParam("country") String country,
                                                      @RequestParam("roles") Set<String> strRoles,
                                                  @RequestParam("about") String about
+
                                              ) throws IOException {
         String msj = "Hi " + firstName + " " + lastName + " Welcome to The-Bridge " +
                 "Thank you for your request for information regarding "+ typeFormation + "Training" +
@@ -181,6 +184,12 @@ emailService.sendSimpleMail(username, subject, msj);
                 "In the meantime, and for any additional information, do not hesitate to contact our team of educational advisers on 20 000 000."
 
                 ;
+
+
+
+
+
+
         String subject = "Bienvenue sur 9antraTraining";
 
 
@@ -205,6 +214,7 @@ emailService.sendSimpleMail(username, subject, msj);
         user.setTypeFormation(typeFormation);
         user.setAbout(about);
         user.setCountry(country);
+
         user.setImage("avatarStudent.png");
 
 

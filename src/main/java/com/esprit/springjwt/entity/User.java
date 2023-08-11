@@ -61,7 +61,8 @@ public  class User {
   public void setCreatedAt(LocalDateTime createdAt) {
     this.createdAt = createdAt;
   }
-
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Note> notes;
   @Column(name = "created_at")
   private LocalDateTime createdAt;
   private String about;
@@ -77,6 +78,10 @@ public  class User {
 
 
   private String country;
+
+
+
+
 
 
 
@@ -143,6 +148,7 @@ public List<Projects> getProjets() {
     this.roles = roles;
     this.formateur = formateur;
     this.about=about;
+
   }
 
   public User(String username, String password, String firstName, String lastName, String numeroTel, String image, String country, int enabled, Set<Role> roles, Formateur formateur) {
@@ -263,4 +269,13 @@ public List<Projects> getProjets() {
     public void setAbout(String about) {
     this.about = about;
     }
+  public void addNote(Note note) {
+    notes.add(note);
+    note.setUser(this);
+  }
+
+  public void removeNote(Note note) {
+    notes.remove(note);
+    note.setUser(null);
+  }
 }

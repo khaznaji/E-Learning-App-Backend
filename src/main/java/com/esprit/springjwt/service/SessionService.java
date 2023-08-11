@@ -3,11 +3,7 @@ package com.esprit.springjwt.service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +40,8 @@ public class SessionService {
 	    for (Groups group : groups) {
 	        group.getSessions().add(session);
 	    }
+
+        session.setGeneratedLink(this.generateRandomWord());
 
 	    return SessionRepository.save(session);
 	}
@@ -127,8 +125,19 @@ public class SessionService {
 
         return new ArrayList<>(uniqueSessions);
     }
-   
-    
-    
+
+
+    public static String generateRandomWord() {
+        String characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder word = new StringBuilder();
+
+        Random random = new Random();
+        for (int i = 0; i < 5; i++) {
+            int randomIndex = random.nextInt(characters.length());
+            word.append(characters.charAt(randomIndex));
+        }
+
+        return word.toString();
+    }
    
 }
