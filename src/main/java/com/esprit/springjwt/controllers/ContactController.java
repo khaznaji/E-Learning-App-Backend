@@ -34,7 +34,7 @@ public class ContactController {
                 "Message: " + contact.getMessage();
 
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo("gazzahiwala@gmail.com"); // Replace with the recipient email address
+        message.setTo("zied.19965@gmail.com"); // Replace with the recipient email address
         message.setSubject(subject);
         message.setText(body);
 
