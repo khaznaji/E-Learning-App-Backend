@@ -65,7 +65,7 @@ public class GroupsController {
     public ResponseEntity<?> addGroups(@Valid @RequestBody Groups groups) {
         String GroupName = groups.getGroupName();
         boolean groupNameExists = groupsService.checkIfGroupNameExists(GroupName);
-
+groups.setCertificatesGenerated(false);
         // Check if the groupName already exists
         if (groupNameExists) {
             return ResponseEntity.badRequest().body("Group name already exists");
@@ -89,6 +89,8 @@ public class GroupsController {
 
     @PutMapping("/update")
     public Groups updateGroups(@Valid @RequestBody Groups groups) {
+        groups.setCertificatesGenerated(false);
+
         return groupsService.updateGroups(groups);
     }
 

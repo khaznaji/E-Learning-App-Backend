@@ -39,7 +39,8 @@ public class Groups implements Serializable {
 	private Map<Long, Boolean> userPresenceStatus = new HashMap<>();
 
 
-
+	@Column(name = "certificates_generated")
+	private boolean certificatesGenerated;
 
 
 	@ManyToMany(mappedBy = "groups")
