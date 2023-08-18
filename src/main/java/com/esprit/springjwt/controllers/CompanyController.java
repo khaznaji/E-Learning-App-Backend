@@ -2,7 +2,7 @@ package com.esprit.springjwt.controllers;
 import com.esprit.springjwt.entity.AdminProjects;
 import com.esprit.springjwt.entity.Offers;
 import com.esprit.springjwt.entity.ProjectOwner;
-import com.esprit.springjwt.entity.company;
+import com.esprit.springjwt.entity.Company;
 import com.esprit.springjwt.exception.ResourceNotFoundException;
 import com.esprit.springjwt.repository.OffersRepository;
 import com.esprit.springjwt.service.CompanyService;
@@ -33,12 +33,12 @@ public class CompanyController {
     OffersService offersService;
     @GetMapping("/All")
     @ResponseBody
-    public List<company> getAll(){
+    public List<Company> getAll(){
         return companyService.getAll();
     }
 
     @PostMapping("/add")
-    public company create(@RequestParam("file") MultipartFile file,
+    public Company create(@RequestParam("file") MultipartFile file,
                           @RequestParam("nom") String nom,
 
                           @RequestParam("numtel") int numtel,
@@ -47,7 +47,7 @@ public class CompanyController {
 
     ) {
         try {
-            company food = new company();
+            Company food = new Company();
             food.setNom(nom);
             food.setAdresse(adresse);
             food.setDescription(description);
@@ -60,7 +60,7 @@ public class CompanyController {
             String timestamp = Long.toString(System.currentTimeMillis());
 
             // Set the destination path to save the image
-            String destinationPath = "C:\\Users\\DELL\\Desktop\\The Bridge Front\\9antraFormationFrant\\src\\assets\\Company\\";
+            String destinationPath = "C:\\Users\\DELL\\Desktop\\testfront\\src\\assets\\Company\\";
 
             // Create a new filename using the timestamp and original filename
             String newFilename = timestamp + "_" + file.getOriginalFilename();
@@ -86,16 +86,16 @@ public class CompanyController {
         companyService.delete(id);
     }
     @GetMapping("/catId/{id}")
-    public ResponseEntity<company> getEventsById(@PathVariable("id") Long id) {
+    public ResponseEntity<Company> getEventsById(@PathVariable("id") Long id) {
 
-        company employee = companyService.findById(id)
+        Company employee = companyService.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + id));
         return ResponseEntity.ok().body(employee);
 
     }
 
     @PutMapping("/update/{id}")
-    public company update(@PathVariable("id") Long id,
+    public Company update(@PathVariable("id") Long id,
                           @RequestParam(value = "file", required = false) MultipartFile file,
                           @RequestParam(value = "nom", required = false) String nom,
                           @RequestParam(value = "numtel", required = false) Integer numtel,
@@ -103,7 +103,7 @@ public class CompanyController {
                           @RequestParam(value = "description", required = false) String description,
                           @RequestParam(value = "adresse", required = false) String adresse
     ) throws ResourceNotFoundException {
-        company existingCompany = companyService.findById(id)
+        Company existingCompany = companyService.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Company not found with id: " + id));
 
         try {
@@ -175,7 +175,7 @@ public class CompanyController {
 
 
     @PostMapping("/addC")
-    public company createC(@RequestParam("file") MultipartFile file,
+    public Company createC(@RequestParam("file") MultipartFile file,
                               @RequestParam("nom") String nom,
 
                           @RequestParam("numtel") int numtel,
@@ -184,7 +184,7 @@ public class CompanyController {
 
     ) {
         try {
-            company food = new company();
+            Company food = new Company();
             food.setNom(nom);
             food.setAdresse(adresse);
             food.setDescription(description);
@@ -196,7 +196,7 @@ public class CompanyController {
             String timestamp = Long.toString(System.currentTimeMillis());
 
             // Set the destination path to save the image
-            String destinationPath = "C:\\Users\\DELL\\Desktop\\The Bridge Front\\9antraFormationFrant\\src\\assets\\Company\\";
+            String destinationPath = "C:\\Users\\DELL\\Desktop\\testfront\\src\\assets\\Company\\";
 
             // Create a new filename using the timestamp and original filename
             String newFilename = timestamp + "_" + file.getOriginalFilename();
@@ -225,8 +225,8 @@ public class CompanyController {
         return ResponseEntity.ok().build();
     }
     @GetMapping("/getStatus/{status}")
-    public ResponseEntity<List<company>> getClaimsByStatus(@PathVariable boolean status) {
-        List<company> claims = companyService.getClaimsByStatus(status);
+    public ResponseEntity<List<Company>> getClaimsByStatus(@PathVariable boolean status) {
+        List<Company> claims = companyService.getClaimsByStatus(status);
         return new ResponseEntity<>(claims, HttpStatus.OK);
     }
 /*    @PutMapping("/update/{id}")
@@ -299,12 +299,12 @@ public class CompanyController {
     }*/
             @GetMapping("/AllByS")
             @ResponseBody
-            public List<company> getAllS(){
+            public List<Company> getAllS(){
                 return companyService.getAllActive();
             }
     @GetMapping("/getSortedByDate/{order}")
-    public ResponseEntity<List<company>> getClaimsSortedByDate(@PathVariable String order) {
-        List<company> claims;
+    public ResponseEntity<List<Company>> getClaimsSortedByDate(@PathVariable String order) {
+        List<Company> claims;
         if (order.equalsIgnoreCase("asc")) {
             claims = companyService.getAllClaimsSortedByDateAsc();
         } else if (order.equalsIgnoreCase("desc")) {

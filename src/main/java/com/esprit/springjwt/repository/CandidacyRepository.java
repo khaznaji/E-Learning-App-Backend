@@ -2,7 +2,7 @@ package com.esprit.springjwt.repository;
 
 import com.esprit.springjwt.entity.Candidacy;
 import com.esprit.springjwt.entity.ProjectClient;
-import com.esprit.springjwt.entity.company;
+import com.esprit.springjwt.entity.Company;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

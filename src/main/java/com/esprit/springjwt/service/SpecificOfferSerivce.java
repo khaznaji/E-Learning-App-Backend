@@ -3,7 +3,6 @@ package com.esprit.springjwt.service;
 import com.esprit.springjwt.entity.Offers;
 import com.esprit.springjwt.entity.SpecificOffer;
 import com.esprit.springjwt.entity.SpecificProject;
-import com.esprit.springjwt.entity.company;
 import com.esprit.springjwt.exception.ResourceNotFoundException;
 import com.esprit.springjwt.repository.CompanyRepository;
 import com.esprit.springjwt.repository.SpecificOfferRepository;

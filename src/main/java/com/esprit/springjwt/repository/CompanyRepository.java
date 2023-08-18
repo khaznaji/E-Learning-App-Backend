@@ -5,11 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface CompanyRepository extends JpaRepository<company,Long> {
-    List<company> findByStatus(boolean status);
-    List<company> findAllByOrderByDateAsc(); // for ascending order
+public interface CompanyRepository extends JpaRepository<Company,Long> {
+    List<Company> findByStatus(boolean status);
+    List<Company> findAllByOrderByDateAsc(); // for ascending order
 
-    List<company> findAllByOrderByDateDesc(); // for descending order
+    List<Company> findAllByOrderByDateDesc(); // for descending order
 
 
 }
