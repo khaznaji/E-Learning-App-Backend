@@ -79,7 +79,7 @@ public class ProjectsService {
     }
  return null;
     }
-  
+
     public Projects addProject(MultipartFile file) {
         // Vérifier si le fichier est de type ZIP, RAR, docx, jpg, jpeg, png, ppt ou pdf
         String contentType = file.getContentType();
