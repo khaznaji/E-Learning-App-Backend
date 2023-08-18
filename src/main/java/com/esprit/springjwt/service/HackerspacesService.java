@@ -26,6 +26,7 @@ public class HackerspacesService {
    // public static String UPLOAD_DOCUMENTS = "C:\\Users\\Wale\\Desktop\\Final Design\\bridge\\src\\assets\\Documents\\";
     public static String UPLOAD_DOCUMENTS = "C:\\Users\\DELL\\Desktop\\The Bridge Front\\9antraFormationFrant\\src\\assets\\Documents\\";
 
+
     public Hackerspaces addHackerspaces(
             String Region,
             String Location,
@@ -41,6 +42,17 @@ public class HackerspacesService {
         byte[] bytes1 = filesName.getBytes();
         Path path1 = Paths.get(UPLOAD_DOCUMENTS + filesName);
         Files.write(path1, bytes1);
+        // Generate a timestamp for the image filename
+        String timestamp = Long.toString(System.currentTimeMillis());
+
+        // Set the destination path to save the image
+        String destinationPath = "C:\\Users\\Wale\\Desktop\\zied\\9antraFormationFrant-wale\\src\\assets\\Documents\\";
+
+        // Create a new filename using the timestamp and original filename
+        String newFilename = timestamp + "_" + photo.getOriginalFilename();
+
+        // Save the file to the disk
+        photo.transferTo(new File(UPLOAD_DOCUMENTS + newFilename));
         String attributeName = Region.replaceAll("\\s+", "");
         ;
 
@@ -51,7 +63,7 @@ public class HackerspacesService {
         hackerspaces.setEmail(Email);
         hackerspaces.setAdresse(Adresse);
         hackerspaces.setDescription(Description);
-        hackerspaces.setPhoto(filesName);
+        hackerspaces.setPhoto(newFilename);
         return hackerspacesRepository.save(hackerspaces);
 
     }

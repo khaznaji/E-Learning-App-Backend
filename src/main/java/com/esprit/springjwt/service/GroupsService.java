@@ -2,6 +2,9 @@ package com.esprit.springjwt.service;
 
 
 import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,26 +45,63 @@ public class GroupsService {
         Optional<Groups> optionalGroups = groupsRepository.findById(id);
         return optionalGroups.orElse(null);
     }
+    public void deleteGroups(Long groupId) {
+        Groups group = groupsRepository.findById(groupId)
+                .orElseThrow(() -> new RuntimeException("Group not found"));
 
-    public void deleteGroups(Long id) {
-        groupsRepository.deleteById(id);
+        // Remove the relationship between the group and students
+        group.getEtudiants().forEach(etudiant -> etudiant.getGroups().remove(group));
+        group.getEtudiants().clear();
+
+        // Delete the sessions associated with the group
+        group.getSessions().forEach(session -> session.getGroups().remove(group));
+        group.getSessions().clear();
+
+        // Delete the group
+        groupsRepository.delete(group);
     }
-    public boolean checkIfGroupNameExists(String groupName) {
-        return groupsRepository.existsByGroupNameIgnoreCase(groupName);
-    }
+
     public List<Groups> getGroupsByFormation(Long Id) {
         return groupsRepository.findByFormationId(Id);
     }
     public List<Groups> getGroupsByIds(List<Long> groupIds) {
         return groupsRepository.findAllById(groupIds);
     }
-   public List<Groups> getGroupsBySessionId(Long sessionId) {
+    public List<Groups> getGroupsBySessionId(Long sessionId) {
         Optional<Session> sessionOptional = sessionRepository.findById(sessionId);
         if (sessionOptional.isPresent()) {
             Session session = sessionOptional.get();
             return session.getGroups();
         }
         return Collections.emptyList();
+    }
+
+
+    public void removeEtudiantFromGroup(Long groupId, Long etudiantId) {
+        Groups group = groupsRepository.findById(groupId)
+                .orElseThrow(() -> new RuntimeException("Group not found"));
+
+        User user = userRepository.findById(etudiantId)
+                .orElseThrow(() -> new RuntimeException("Etudiant not found"));
+
+        if (!group.getEtudiants().contains(user)) {
+            throw new RuntimeException("Etudiant is not a member of the group");
+        }
+
+        group.getEtudiants().remove(user);
+        user.getGroups().remove(group);
+
+        groupsRepository.save(group);
+        userRepository.save(user);
+    }
+    public List<Groups> getGroupsByFormateurId(Long formateurId) {
+        return groupsRepository.findByFormateurId(formateurId);
+    }
+
+
+
+    public boolean checkIfGroupNameExists(String groupName) {
+        return groupsRepository.existsByGroupNameIgnoreCase(groupName);
     }
 
 
@@ -86,23 +126,7 @@ public class GroupsService {
         userRepository.save(user);
         groupsRepository.save(group);
     }
-    public void removeEtudiantFromGroup(Long groupId, Long etudiantId) {
-        Groups group = groupsRepository.findById(groupId)
-                .orElseThrow(() -> new RuntimeException("Group not found"));
 
-        User user = userRepository.findById(etudiantId)
-                .orElseThrow(() -> new RuntimeException("Etudiant not found"));
-
-        if (!group.getEtudiants().contains(user)) {
-            throw new RuntimeException("Etudiant is not a member of the group");
-        }
-
-        group.getEtudiants().remove(user);
-        user.getGroups().remove(group);
-
-        groupsRepository.save(group);
-        userRepository.save(user);
-    }
     
 
 }

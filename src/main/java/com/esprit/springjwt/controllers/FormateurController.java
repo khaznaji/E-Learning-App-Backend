@@ -29,10 +29,10 @@ public class FormateurController {
 
 
     @GetMapping("/all")
-    public List<Formateur> getAll()
-    {
+    public List<Formateur> getAll() {
         return formateurService.getAllFormateurs();
     }
+
     @GetMapping("/me")
     public ResponseEntity<User> getCurrentUserDetails() {
         User currentUser;
@@ -48,27 +48,13 @@ public class FormateurController {
 
         return ResponseEntity.ok(currentUser);
     }
-    @PostMapping("/addImage")
-    public ResponseEntity<User> addImage(@RequestParam("file") MultipartFile file) {
-        User currentUser;
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication.getPrincipal() instanceof UserDetailsImpl) {
-            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-            currentUser = userDetails.getUser();
-            User updatedUser = userService.updateImage(currentUser, file);
-            return ResponseEntity.ok(updatedUser);
-        } else {
-            // Utiliser un utilisateur par défaut avec un nom d'utilisateur spécifique
-            User defaultUser = userRepository.findByUsername("coach1@gmail.com");
-            if (defaultUser != null) {
-                User updatedUser = userService.updateImage(defaultUser, file);
-                return ResponseEntity.ok(updatedUser);
-            } else {
-                throw new IllegalArgumentException("Default user not found");
-            }
-        }
+    @PutMapping("/updateFormateurByIdUser")
+    public Formateur updateFormateurByIdUser(@RequestBody Formateur formateur) {
+        return formateurService.updateFormateurByIdUser(formateur);
     }
-
-
 }
+
+
+
+

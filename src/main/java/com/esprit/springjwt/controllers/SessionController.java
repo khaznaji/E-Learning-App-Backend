@@ -28,6 +28,24 @@ import com.esprit.springjwt.entity.Session;
 import com.esprit.springjwt.repository.GroupsRepository;
 import com.esprit.springjwt.service.SessionService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.esprit.springjwt.entity.Groups;
+import com.esprit.springjwt.entity.Session;
+import com.esprit.springjwt.repository.GroupsRepository;
+import com.esprit.springjwt.service.SessionService;
+
 @RestController
 @RequestMapping("/api/sessions")
 @CrossOrigin(origins = "*")
@@ -37,10 +55,16 @@ public class SessionController {
     @Autowired
     private GroupsRepository groupsRepository;
 
+
+
     @Autowired
     public SessionController(SessionService sessionService) {
         this.SessionService = sessionService;
     }
+
+
+
+
 
     @GetMapping("/allSession")
     public List<Session> getAllSession() {
@@ -69,25 +93,6 @@ public class SessionController {
         SessionService.deleteSession(id);
     }
 
-    @GetMapping("/date/{date}")
-    public List<Session> getSessionsByDate(@PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
-        return SessionService.getSessionsByDate(date);
-    }
-
-    @GetMapping("/users/{userId}")
-    public List<Session> getSessionsByUserId(@PathVariable Long userId) {
-        return SessionService.getSessionsByUserId(userId);
-    }
-
-    @GetMapping("/formateur/{formateurId}")
-    public List<Session> getSessionsByFormateurId(@PathVariable Long formateurId) {
-        return SessionService.getSessionsByFormateurId(formateurId);
-    }
-
-    @GetMapping("/byGroupId/{groupId}")
-    public List<Session> getSessionsByGroupId(@PathVariable Long groupId) {
-        return SessionService.getSessionsByGroupId(groupId);
-    }
 
     @GetMapping("/{sessionId}/groups/{groupId}/users/{userId}/markPresence")
     public ResponseEntity<String> markUserPresence(
@@ -127,5 +132,20 @@ public class SessionController {
     public Map<Long, Boolean> getUserPresenceStatusBySessionId(@PathVariable Long sessionId) {
         return SessionService.getUserPresenceStatusBySessionId(sessionId);
     }
-
+    @GetMapping("/date/{date}")
+    public List<Session> getSessionsByDate(@PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd")Date date) {
+        return SessionService.getSessionsByDate(date);
+    }
+    @GetMapping("/users/{userId}")
+    public List<Session> getSessionsByUserId(@PathVariable Long userId) {
+        return SessionService.getSessionsByUserId(userId);
+    }
+    @GetMapping("/formateur/{formateurId}")
+    public List<Session> getSessionsByFormateurId(@PathVariable Long formateurId) {
+        return SessionService.getSessionsByFormateurId(formateurId);
+    }
+    @GetMapping("/byGroupId/{groupId}")
+    public List<Session> getSessionsByGroupId(@PathVariable Long groupId) {
+        return SessionService.getSessionsByGroupId(groupId);
+    }
 }

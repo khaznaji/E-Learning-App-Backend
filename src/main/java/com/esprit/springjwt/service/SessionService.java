@@ -10,6 +10,12 @@ import com.esprit.springjwt.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.esprit.springjwt.entity.Groups;
+import com.esprit.springjwt.entity.Session;
+import com.esprit.springjwt.entity.User;
 import com.esprit.springjwt.repository.GroupsRepository;
 import com.esprit.springjwt.repository.SessionRepository;
 import com.esprit.springjwt.repository.UserRepository;
@@ -38,6 +44,9 @@ public class SessionService {
 	    for (Groups group : groups) {
 	        group.getSessions().add(session);
 	    }
+
+
+        session.setGeneratedLink(this.generateRandomWord());
 
 	    return SessionRepository.save(session);
 	}
@@ -205,6 +214,21 @@ public class SessionService {
             return new HashMap<>();
         }
         return session.getUserPresence();
+
     }
 
+
+    public static String generateRandomWord() {
+        String characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder word = new StringBuilder();
+
+        Random random = new Random();
+        for (int i = 0; i < 5; i++) {
+            int randomIndex = random.nextInt(characters.length());
+            word.append(characters.charAt(randomIndex));
+        }
+
+        return word.toString();
+    }
+   
 }

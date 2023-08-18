@@ -85,6 +85,31 @@ public class FormationService {
     }
 
 
+// update formation
+public Formation updateFormation(Formation updatedFormation) {
+    Long formationId = updatedFormation.getId();
+    // Make sure the formationId is not null
+    if (formationId == null) {
+        throw new IllegalArgumentException("Invalid Formation ID: " + formationId);
+    }
+
+    // Retrieve the existing Formation object by its ID
+    Formation existingFormation = formationRepository.findById(formationId)
+            .orElseThrow(() -> new IllegalArgumentException("Formation not found for ID: " + formationId));
+
+    // Update the relevant fields of the existing Formation object
+    existingFormation.setNomFormation(updatedFormation.getNomFormation());
+    existingFormation.setDescription(updatedFormation.getDescription());
+    existingFormation.setNbChapters(updatedFormation.getNbChapters());
+
+    // Save the updated Formation object
+    Formation updatedFormationObj = formationRepository.save(existingFormation);
+
+    return updatedFormationObj;
+}
+
+
+
 }
 
 

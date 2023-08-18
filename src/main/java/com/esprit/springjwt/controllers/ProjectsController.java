@@ -11,6 +11,7 @@ import com.esprit.springjwt.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -46,10 +47,17 @@ public class ProjectsController {
 
         return users;
     }
+
     @GetMapping("/StudentProjects")
     public List<Projects> StudentProjects() {
         return ProjectsService.getAllProjectsStudent();
     }
+
+    @GetMapping("/StudentProjects/{id}")
+    public List<Projects> StudentProjects(@PathVariable("id") Long id) {
+        return ProjectsService.getAllProjectsStudent(id);
+    }
+
     @GetMapping("/countStudentProjects")
     public int countStudentProjects() {
         List<Projects> studentProjects = ProjectsService.getAllProjectsStudent();
@@ -67,10 +75,20 @@ public class ProjectsController {
         return Collections.emptyList(); // Si l'utilisateur n'est pas trouvé, renvoyez une liste vide ou une réponse appropriée selon vos besoins
     }
 
-  @PostMapping("/add")
+  @PostMapping("/add2")
+
   public Projects addProjectWithFile(@RequestParam("file") MultipartFile file) {
+
       return ProjectsService.addProject(file);
   }
+    @PostMapping("/add")
+
+    public Projects addProjectWithFile2(@RequestParam("file") MultipartFile file,@RequestParam("id") Long id) {
+
+        return ProjectsService.addProject2(file,id);
+    }
+
+
 
     @PutMapping("/{projectId}/update")
     public Projects updateProjectWithFile(@PathVariable("projectId") Long projectId, @RequestParam("file") MultipartFile file) {
@@ -89,6 +107,8 @@ public class ProjectsController {
             // Utiliser une valeur par défaut ou une chaîne vide si le principal n'est pas disponible
             username = "user1@gmail.com";
         }
+
+
         // Récupérer l'utilisateur à partir du username (à adapter selon votre implémentation)
             User user = userRepository.findByUsername(username);
             if (user != null) {
@@ -97,6 +117,7 @@ public class ProjectsController {
 
                 // Construire le chemin du dossier utilisateur
                 String userFolderPath = "C:\\Users\\DELL\\Desktop\\The Bridge Front\\9antraFormationFrant\\src\\assets\\projects\\" + userFolderName;
+
 
                 // Vérifier si le dossier utilisateur existe
                 File userFolder = new File(userFolderPath);
@@ -110,8 +131,6 @@ public class ProjectsController {
         // Renvoyer une réponse d'erreur si le dossier utilisateur n'a pas été trouvé
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User project folder not found");
     }
-
-
 
     @GetMapping("/getProjectsById/{id}")
     public Projects getProjectsById(@PathVariable("id") Long id)

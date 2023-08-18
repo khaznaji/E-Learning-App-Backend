@@ -8,6 +8,8 @@ import javax.validation.Valid;
 import com.esprit.springjwt.entity.AdminProjects;
 import com.esprit.springjwt.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,11 @@ import com.esprit.springjwt.entity.Groups;
 import com.esprit.springjwt.service.FormationService;
 import com.esprit.springjwt.service.GroupsService;
 import com.esprit.springjwt.service.SessionService;
+import com.esprit.springjwt.entity.User;
+import com.esprit.springjwt.service.FormationService;
+import com.esprit.springjwt.service.GroupsService;
+import com.esprit.springjwt.service.SessionService;
+import com.esprit.springjwt.service.userService;
 
 @RestController
 @RequestMapping("/api/groups")
@@ -31,7 +38,9 @@ public class GroupsController {
     private FormationService trainingService;
     @Autowired
     private  SessionService sessionService;
-   
+
+    @Autowired
+    private userService userService;
 
     @Autowired
     public GroupsController(GroupsService groupsService) {
@@ -44,12 +53,16 @@ public class GroupsController {
     }
     
    /* @GetMapping("/session/{sessionId}")
+=======
+    @GetMapping("/session/{sessionId}")
+>>>>>>> be580cfb8ee2202c856076a4d3b3ebbc07f2dcf5
     public ResponseEntity<List<Groups>> getGroupsBySessionId(@PathVariable Long sessionId) {
         List<Groups> groups = groupsService.getGroupsBySessionId(sessionId);
         if (!groups.isEmpty()) {
             return ResponseEntity.ok(groups);
         }
         return ResponseEntity.noContent().build();
+<<<<<<< HEAD
     }*/
    @GetMapping("/session/{sessionId}")
    public ResponseEntity<List<Groups>> getGroupsBySessionId(@PathVariable Long sessionId) {
@@ -61,11 +74,12 @@ public class GroupsController {
    }
 
 
+
     @PostMapping("/add")
     public ResponseEntity<?> addGroups(@Valid @RequestBody Groups groups) {
         String GroupName = groups.getGroupName();
         boolean groupNameExists = groupsService.checkIfGroupNameExists(GroupName);
-groups.setCertificatesGenerated(false);
+        groups.setCertificatesGenerated(false);
         // Check if the groupName already exists
         if (groupNameExists) {
             return ResponseEntity.badRequest().body("Group name already exists");
@@ -79,7 +93,7 @@ groups.setCertificatesGenerated(false);
     public Groups getGroupsById(@PathVariable("id") Long id) {
         return groupsService.getGroupsById(id);
     }
-   
+
     
     @GetMapping("/by-formation/{id}")
     public List<Groups> getGroupsByFormation(@PathVariable("id") Long Id) {
@@ -91,6 +105,7 @@ groups.setCertificatesGenerated(false);
     public Groups updateGroups(@Valid @RequestBody Groups groups) {
         groups.setCertificatesGenerated(false);
 
+
         return groupsService.updateGroups(groups);
     }
 
@@ -98,6 +113,7 @@ groups.setCertificatesGenerated(false);
     public void deleteGroups(@PathVariable("id") Long id) {
         groupsService.deleteGroups(id);
     }
+
     @PostMapping("/{groupId}/etudiants/{etudiantId}")
     public ResponseEntity<String> addEtudiantToGroup(@PathVariable Long groupId, @PathVariable Long etudiantId) {
         try {
@@ -111,4 +127,22 @@ groups.setCertificatesGenerated(false);
     public void removeEtudiantFromGroup(@PathVariable Long groupId, @PathVariable Long etudiantId) {
             groupsService.removeEtudiantFromGroup(groupId, etudiantId);           
     }
+
+    @GetMapping("/by-user/{userId}")
+    public ResponseEntity<List<Groups>> getGroupsByUserId(@PathVariable Long userId) {
+        User user = userService.getUserById(userId);
+
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        List<Groups> userGroups = user.getGroups();
+        return ResponseEntity.ok(userGroups);
+    }
+    @GetMapping("/by-formateur/{formateurId}")
+    public ResponseEntity<List<Groups>> getGroupsByFormateurId(@PathVariable Long formateurId) {
+        List<Groups> groups = groupsService.getGroupsByFormateurId(formateurId);
+        return new ResponseEntity<>(groups, HttpStatus.OK);
+    }
+
 }

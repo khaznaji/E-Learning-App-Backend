@@ -44,7 +44,9 @@ public class Formation implements Serializable {
     private int nbProjects;
     private int nbExercices;
     private int nbMeetings;
+    private int workspaces;
     private String Description;
-	
-    
+
+	private String posibility;
+
 }

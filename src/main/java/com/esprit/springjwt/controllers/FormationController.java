@@ -58,6 +58,18 @@ public class FormationController {
     }
     //update formation
 
+    @PutMapping("/updateFormation/{id}")
+    public Formation updateFormation(@PathVariable("id") Long id, @RequestBody Formation updatedFormation) {
+        Formation formation = formationService.getFormationById(id);
+        if (formation == null) {
+            throw new IllegalArgumentException("Formation not found for ID: " + id);
+        }
+
+        updatedFormation.setId(id);
+        Formation updatedFormationObj = formationService.updateFormation(updatedFormation);
+        return updatedFormationObj;
+    }
+
 
 
 

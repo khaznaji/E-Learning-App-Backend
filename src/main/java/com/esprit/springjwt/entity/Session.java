@@ -6,6 +6,12 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.*;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -19,7 +25,9 @@ public class Session implements Serializable {
     private String SessionName ;
     private String Description ;
     private Date startDate;
-	
+
+	@Column(unique = true)
+	private String GeneratedLink;
     private Date finishDate;
     private String GroupSession;
     
@@ -41,6 +49,7 @@ public class Session implements Serializable {
 	@Column(name = "presence_status")
 	private Map<Long, Boolean> userPresence = new HashMap<>();
 	public List<Groups> getGroups() {
+
         return groups;
     }
 

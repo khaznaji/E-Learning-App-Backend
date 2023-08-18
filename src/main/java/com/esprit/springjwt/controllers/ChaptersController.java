@@ -5,6 +5,7 @@ import com.esprit.springjwt.entity.Chapters;
 import com.esprit.springjwt.entity.Formation;
 import com.esprit.springjwt.service.ChaptersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,10 +32,12 @@ public class ChaptersController {
     {
         return ChaptersService.getChaptersById(id);
     }
-    @PutMapping("/updateChapters")
-public Chapters updateChapters(@RequestBody Chapters Chapters){
-        return ChaptersService.updateChapters(Chapters);
+    @DeleteMapping("/deleteChapters/{id}")
+    public void deleteChapters(@PathVariable("id") Long id)
+    {
+        ChaptersService.deleteChapters(id);
     }
+
     //get chapters by  id formation
     //@GetMapping("/getChaptersByFormationId/{id}")
     //public List<Chapters> getChaptersByFormationId(@PathVariable("id") Long id)

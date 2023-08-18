@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -109,7 +110,10 @@ FormateurRepository formateurRepository;
                                                @RequestParam("Github") String GithubLink,
                                                @RequestParam("country") String country,
                                                   @RequestParam("skills") String skills,
-                                               @RequestParam("Linkedin") String LinkedinLink) throws IOException {
+                                               @RequestParam("Linkedin") String LinkedinLink
+                                           /*    @RequestParam("about") String about*/
+
+                                               ) throws IOException {
 
         String msj = "Bonjour " + firstName + " " + lastName + " votre compte a été crée avec succés";
         String subject = "Bienvenue sur 9antraTraining";
@@ -128,7 +132,9 @@ FormateurRepository formateurRepository;
         user.setLastName(lastName);
         user.setNumeroTel(numeroTel);
         user.setTypeFormation(typeFormation);
-        user.setImage("profile-img.jpg");
+    /*    user.setAbout(about);*/
+
+        user.setImage("avatarCoach.png");
 
         byte[] bytes1 = files.getBytes();
         Path path1 = Paths.get(UPLOAD_DOCUMENTS + filesName);
@@ -143,6 +149,8 @@ FormateurRepository formateurRepository;
         }
         user.setRoles(roles);
         user.setCountry(country);
+        user.setCreatedAt(LocalDateTime.now());
+
         userRepository.save(user);
 
         Formateur formateur = new Formateur();
@@ -160,15 +168,31 @@ emailService.sendSimpleMail(username, subject, msj);
 
 
 
+
     @PostMapping("/signupstudent")
     public ResponseEntity<?> registerUserStudent(@RequestParam("username") String username,
                                                @RequestParam("password") String password,
                                                @RequestParam("firstName") String firstName,
                                                @RequestParam("lastName") String lastName,
                                                @RequestParam("numeroTel") String numeroTel,
-                                               @RequestParam("typeFormation") String typeFormation, @RequestParam("country") String country, @RequestParam("roles") Set<String> strRoles
+                                               @RequestParam("typeFormation") String typeFormation,
+                                                 @RequestParam("country") String country,
+                                                 @RequestParam("roles") Set<String> strRoles,
+                                                 @RequestParam("about") String about
+
                                              ) throws IOException {
-        String msj = "Bonjour " + firstName + " " + lastName + " votre compte a été crée avec succés";
+        String msj = "Hi " + firstName + " " + lastName + " Welcome to The-Bridge " +
+                "Thank you for your request for information regarding "+ typeFormation + "Training" +
+                "Our team will contact you to finalize your registration to support you in your project, within 48 hours." +
+                "In the meantime, and for any additional information, do not hesitate to contact our team of educational advisers on 20 000 000."
+
+                ;
+
+
+
+
+
+
         String subject = "Bienvenue sur 9antraTraining";
 
 
@@ -191,10 +215,10 @@ emailService.sendSimpleMail(username, subject, msj);
         user.setLastName(lastName);
         user.setNumeroTel(numeroTel);
         user.setTypeFormation(typeFormation);
-
-
+        user.setAbout(about);
         user.setCountry(country);
-        user.setImage("imagePath");
+
+        user.setImage("avatarStudent.png");
 
 
 
@@ -227,7 +251,7 @@ emailService.sendSimpleMail(username, subject, msj);
 
 
         user.setRoles(roles);
-
+        user.setCreatedAt(LocalDateTime.now());
 
         userRepository.save(user);
 
