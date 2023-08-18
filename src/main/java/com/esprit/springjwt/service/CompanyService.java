@@ -1,8 +1,8 @@
 package com.esprit.springjwt.service;
 
 import com.esprit.springjwt.entity.Candidacy;
+import com.esprit.springjwt.entity.Company;
 import com.esprit.springjwt.entity.ProjectOwner;
-import com.esprit.springjwt.entity.company;
 import com.esprit.springjwt.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,24 +18,24 @@ import java.util.Optional;
 public class CompanyService {
     @Autowired
     CompanyRepository companyRepository;
-    public company save(company food) {
+    public Company save(Company food) {
         return companyRepository.save(food);
     }
-    public List<company> getAll() {
+    public List<Company> getAll() {
         return companyRepository.findAll();
     }
-    public Optional<company > findById(Long id) {
+    public Optional<Company > findById(Long id) {
         return companyRepository.findById(id);
     }
-    public List<company> getAllClaimsSortedByDateAsc() {
+    public List<Company> getAllClaimsSortedByDateAsc() {
         return companyRepository.findAllByOrderByDateAsc();
     }
-    public List<company> getAllClaimsSortedByDateDesc() {
+    public List<Company> getAllClaimsSortedByDateDesc() {
         return companyRepository.findAllByOrderByDateDesc();
     }
 
     public void     delete(Long id) {
-        company project = companyRepository.findById(id)
+        Company project = companyRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Project not found"));
 
         String fileName = project.getImage();
@@ -56,12 +56,12 @@ public class CompanyService {
         // Supprimer l'entrée de la base de données
         companyRepository.deleteById(id);
     }
-    public List<company> getClaimsByStatus(Boolean status) {
+    public List<Company> getClaimsByStatus(Boolean status) {
         return companyRepository.findByStatus(status);
     }
     public void updateStatus(Long id, boolean newValue) {
         // Recherche de l'objet MyClass correspondant à l'identifiant "id"
-        company myObject = companyRepository.findById(id).orElse(null);
+        Company myObject = companyRepository.findById(id).orElse(null);
 
         // Vérification que l'objet a été trouvé
         if (myObject != null) {
@@ -71,7 +71,7 @@ public class CompanyService {
         }
 
     }
-    public List<company> getAllActive() {
+    public List<Company> getAllActive() {
         return companyRepository.findByStatus(true);
     }
 }

@@ -2,7 +2,7 @@ package com.esprit.springjwt.service;
 
 import com.esprit.springjwt.entity.Candidacy;
 import com.esprit.springjwt.entity.ProjectClient;
-import com.esprit.springjwt.entity.company;
+import com.esprit.springjwt.entity.Company;
 import com.esprit.springjwt.repository.CandidacyRepository;
 import com.esprit.springjwt.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;

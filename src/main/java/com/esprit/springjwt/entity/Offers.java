@@ -28,7 +28,7 @@ public class Offers implements Serializable {
     private String education ;
     @ManyToOne
     @JsonIgnore
-    public company company;
+    public Company company;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH-ss-mm")
     private LocalDateTime date = LocalDateTime.now();
     @Value("#{false}")

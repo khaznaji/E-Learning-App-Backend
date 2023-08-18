@@ -2,7 +2,7 @@ package com.esprit.springjwt.controllers;
 
 import com.esprit.springjwt.entity.Candidacy;
 import com.esprit.springjwt.entity.ProjectClient;
-import com.esprit.springjwt.entity.company;
+import com.esprit.springjwt.entity.Company;
 import com.esprit.springjwt.exception.ResourceNotFoundException;
 import com.esprit.springjwt.service.CandidacyService;
 import com.esprit.springjwt.service.CompanyService;

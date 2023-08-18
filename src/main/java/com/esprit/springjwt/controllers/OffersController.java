@@ -52,7 +52,7 @@ public class OffersController {
             food.setStatus(true);
             food.setEducation(education);
 
-            company projectOwner = Catservice.findById(companyId)
+            Company projectOwner = Catservice.findById(companyId)
                     .orElseThrow(() -> new ResourceNotFoundException("ProjectOwner not found with id: " + companyId));
             food.setImage(projectOwner.getImage());
             food.setNom(projectOwner.getNom());
@@ -179,7 +179,7 @@ public class OffersController {
                 existingProject.setEducation(education);
             }
             if (companyId != null) {
-                company category = Catservice.findById(companyId)
+                Company category = Catservice.findById(companyId)
                         .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + companyId));
                 existingProject.setCompany(category);
                 existingProject.setNom(category.getNom());
@@ -191,7 +191,7 @@ public class OffersController {
 // Check if the projectOwnerId has been modified
             boolean isProjectOwnerModified = companyId != null && !existingProject.getCompany().getId().equals(companyId);
             if (existingImages != null) {
-                company projectOwner = Catservice.findById(companyId)
+                Company projectOwner = Catservice.findById(companyId)
                         .orElseThrow(() -> new ResourceNotFoundException("ProjectOwner not found with id: " + companyId));
 
                 String projectOwnerImage = projectOwner.getImage();

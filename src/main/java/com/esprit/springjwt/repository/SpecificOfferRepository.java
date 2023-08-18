@@ -1,7 +1,6 @@
 package com.esprit.springjwt.repository;
 
 import com.esprit.springjwt.entity.SpecificOffer;
-import com.esprit.springjwt.entity.company;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
