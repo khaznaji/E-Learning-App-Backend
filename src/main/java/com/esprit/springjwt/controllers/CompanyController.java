@@ -196,7 +196,7 @@ public class CompanyController {
             String timestamp = Long.toString(System.currentTimeMillis());
 
             // Set the destination path to save the image
-            String destinationPath = "C:\\Users\\DELL\\Desktop\\testfront\\src\\assets\\Company\\";
+            String destinationPath = "C:\\Users\\DELL\\Desktop\\The Bridge Front\\9antraFormationFrant\\src\\assets\\Company\\";
 
             // Create a new filename using the timestamp and original filename
             String newFilename = timestamp + "_" + file.getOriginalFilename();

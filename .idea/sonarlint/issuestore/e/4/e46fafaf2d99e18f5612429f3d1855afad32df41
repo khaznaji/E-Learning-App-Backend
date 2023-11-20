@@ -1,0 +1,10 @@
+
+k	java:S116"VRename this field "Projectname" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¬š€¡
+i	java:S116"ORename this field "Type" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÿà¢ªüÿÿÿÿ
+i	java:S116"ORename this field "Date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÃÂÿÿÿÿÿ
+A
+java:S1948""&Make "user" transient or serializable.(’Ø¾ıÿÿÿÿ
+h
+java:S1128"RRemove this unused import 'com.fasterxml.jackson.annotation.JsonIgnoreProperties'.(ô’ˆî
+`
+java:S1128"JRemove this unused import 'com.fasterxml.jackson.annotation.JsonProperty'.(ËÃ§Ï

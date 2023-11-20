@@ -35,7 +35,7 @@ public class Offers implements Serializable {
     private boolean status;
     private String image;
     private  String nom ;
-    private  String description2 ;
+    private  String description2;
     private  String adresse ;
     private  String email ;
     private  int numtel ;

@@ -1,0 +1,19 @@
+
+e
+java:S1192F"JDefine a constant instead of duplicating this literal "Company\\" 3 times.(èŠÛäşÿÿÿÿ
+\
+java:S1075?"ARefactor your code to get this URI from a customizable parameter.(Áğúÿÿÿÿ
+X
+java:S1075…"ARefactor your code to get this URI from a customizable parameter.(ê˜¡
+V	java:S899“";Do something with the "boolean" value returned by "delete".(¨Ä‘÷øÿÿÿÿ
+j
+java:S4042“"NUse "java.nio.file.Files#delete" here for better messages on error conditions.(¨Ä‘÷øÿÿÿÿ
+X
+java:S1075Ç"ARefactor your code to get this URI from a customizable parameter.(ê˜¡
+i	java:S100ß"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¦À´ôüÿÿÿÿ
+W	java:S125ñ"<This block of commented-out lines of code should be removed.(ÜáŸ—ÿÿÿÿÿ
+R	java:S125›"<This block of commented-out lines of code should be removed.(ÃÄÈˆ
+[
+java:S1128"FRemove this unused import 'com.esprit.springjwt.entity.AdminProjects'.(á…g
+[
+java:S1128"ERemove this unused import 'com.esprit.springjwt.entity.ProjectOwner'.(ÒóÕ‹
